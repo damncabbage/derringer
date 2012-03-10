@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    bootstrap-sass (2.0.1)
     chunky_png (1.2.5)
     coffee-script (2.2.0)
       coffee-script-source
@@ -24,6 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   coffee-script
   compass (~> 0.12.alpha)
   rake
