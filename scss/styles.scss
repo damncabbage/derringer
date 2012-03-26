@@ -2,3 +2,85 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+// Compass libs.
+@import "compass/utilities";
+@import "compass/css3";
+
+// Helpers
+.animated-hide {
+  @include transition-property('opacity, height, padding');
+  @include transition-duration(0.8s);
+  opacity: 1;
+
+  /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */
+  &.fold {
+    opacity: 0;
+    padding-top: 0; padding-bottom: 0;
+    margin-top: 0; margin-bottom: 0;
+  }
+}
+
+
+.masthead {
+  @extend .animated-hide;
+  padding: 60px 30px 30px;
+  text-align: center;
+}
+
+// Search
+#search {
+  @extend .row;
+  margin-bottom: image-height('tap-here.png');
+
+  .inputs {
+    @extend .span10;
+    @extend .offset1;
+    position: relative;
+    background: #ccc;
+    border-radius: 5px;
+    padding: 9px 9px 0 9px;
+  }
+
+  #q {
+    @extend .span8;
+    padding: 12px 8px;
+    line-height: 22px;
+    height: 22px;
+    font-size: 20px;
+  }
+
+  input[type=submit] {
+    @extend .span2;
+    @extend .btn;
+    @extend .btn-primary;
+    @extend .btn-large;
+    float: right;
+    font-size: 20px;
+    padding: 11px 15px;
+  }
+
+  .tip {
+    @extend .animated-hide;
+    @include replace-text-with-dimensions('tap-here.png');
+    position: absolute;
+    top: image-height('tap-here.png') - 20px;
+    right: 0px;
+  }
+}
+
+#results {
+  @extend .animated-hide;
+
+  &.fold {
+    height: 0;
+  }
+  &.loading {
+    height: 200px;
+    background: image-url('loading.gif') no-repeat center 50px;
+  }
+}
+
+hr {
+  margin-top: 180px;
+  display: block;
+}
