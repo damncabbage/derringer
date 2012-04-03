@@ -9,7 +9,7 @@
 // Helpers
 .animated-hide {
   @include transition-property('opacity, height, padding');
-  @include transition-duration(0.8s);
+  @include transition-duration(0.5s);
   opacity: 1;
 
   /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */
@@ -28,59 +28,124 @@
 }
 
 // Search
-#search {
+#form {
   @extend .row;
-  margin-bottom: image-height('tap-here.png');
+  margin-bottom: 45px;
 
   .inputs {
     @extend .span10;
     @extend .offset1;
     position: relative;
     background: #ccc;
-    border-radius: 5px;
+    @include border-radius(5px);
     padding: 9px 9px 0 9px;
+
+    .text {
+      @extend .span8;
+      padding: 12px 8px;
+      line-height: 22px;
+      height: 22px;
+      font-size: 20px;
+    }
+
+    .submit {
+      @extend .span2;
+      @extend .btn;
+      @extend .btn-primary;
+      @extend .btn-large;
+      float: right;
+      font-size: 20px;
+      padding: 11px 15px;
+    }
   }
 
-  #q {
-    @extend .span8;
-    padding: 12px 8px;
-    line-height: 22px;
-    height: 22px;
-    font-size: 20px;
-  }
-
-  input[type=submit] {
-    @extend .span2;
-    @extend .btn;
-    @extend .btn-primary;
-    @extend .btn-large;
-    float: right;
-    font-size: 20px;
-    padding: 11px 15px;
-  }
-
-  .tip {
+  .tip.touch {
     @extend .animated-hide;
     @include replace-text-with-dimensions('tap-here.png');
     position: absolute;
     top: image-height('tap-here.png') - 20px;
     right: 0px;
   }
+  .tip.mouse {
+    display: none;
+  }
 }
 
 #results {
   @extend .animated-hide;
+  min-height: 200px;
 
   &.fold {
     height: 0;
   }
   &.loading {
-    height: 200px;
     background: image-url('loading.gif') no-repeat center 50px;
   }
+  &.done {
+    & > li {
+      opacity: 1;
+    }
+  }
+  & > li {
+    opacity: 0;
+    @include transition(opacity 0.5s);
+  }
 }
+
+.orders {
+  li {
+    display: block;
+    list-style: none;
+    padding: 30px;
+    margin-bottom: 10px;
+    background: #ccc;
+    @include border-radius(5px);
+  }
+}
+
 
 hr {
   margin-top: 180px;
   display: block;
 }
+
+.panels-container {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 92%;
+}
+.panel-outer {
+  @include transition-property(left);
+  @include transition-duration(0.5s);
+  position: absolute;
+  width: 100%;
+  background: #ff8888;
+  left: -50%;
+}
+.panel-inner {
+  @include transition-property(left);
+  @include transition-duration(0.5s);
+  position: absolute;
+  width: 100%;
+  left: 50%;
+}
+
+#search-panel {
+  &.left {
+    left: -100%;
+    .panel-inner {
+      left: 0%;
+    }
+  }
+}
+
+#result-panel {
+  &.right {
+    left: 0%;
+    .panel-inner {
+      left: 100%;
+    }
+  }
+}
+

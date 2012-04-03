@@ -43,70 +43,109 @@
     </div>
   </div>
 
-  <!-- TODO: Turbo / Quick Scan -->
+  <div class="panels-container">
 
-  <div class="container">
+    <div class="panel-outer" id="search-panel">
+      <div class="panel-inner">
+        <div class="container">
+          <!-- TODO: Turbo / Quick Scan -->
 
-    <!-- The changing top-of-page instructions -->
-    <header id="instructions" class="masthead">
-      <h1 class="touch">Scan a barcode, or search for someone:</h1>
-    </header>
+          <!-- The changing top-of-page instructions -->
+          <header id="instructions" class="masthead">
+            <h1 class="touch">Scan a barcode, or search for someone:</h1>
+          </header>
 
-    <!-- The search form -->
-    <div id="search">
-      <div class="inputs">
-        <form>
-          <input id="q" name="q" type="text" placeholder="" />
-          <input id="submit" name="submit" type="submit" value="Go" />
+          <!-- The search form -->
+          <div id="form">
+            <div class="inputs">
+              <form>
+                <input id="search" name="search" type="text" class="text" placeholder="" />
+                <input id="submit" name="submit" type="submit" class="submit" value="Go" />
+              </form>
+              <div class="tip touch">Tap here to get started.</div>
+              <div class="tip mouse">Click here to get started.</div>
+            </div>
+          </div>
 
-          <!--<div style="float: left; width: 70%; background: red">Foo</div>
-          <div style="float: left; width: 30%; background: blue">Blah</div>-->
-        </form>
-        <div class="tip">Tap here to get started</div>
+          <ul id="results" class="fold orders">
+            <li class="single"><a href="#">
+              <h2>Rob Howard</h2>
+            </a></li>
+            <li class="group"><a href="#">
+              <h2>Geoffrey Roberts</h2>
+            </a></li>
+          </ul>
+
+          <!-- Main hero unit for a primary marketing message or call to action -->
+          <!--
+          <div class="hero-unit">
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
+          -->
+
+          <!-- Example row of columns -->
+          <!--
+          <div class="row">
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div>
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div>
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div>
+          </div>
+          -->
+
+          <hr />
+
+          <footer>
+            <p>&copy; SMASH! 2012</p>
+          </footer>
+
+        </div> <!-- /container -->
       </div>
     </div>
 
-    <div id="results" class="fold">
+    <div id="result-panel" class="panel-outer right">
+      <div class="panel-inner">
+        <div class="container">
+          <!-- TODO: Turbo / Quick Scan -->
 
-    </div>
+          <!-- The changing top-of-page instructions -->
+          <header class="masthead">
+            <h1 class="touch">Badda-bing:</h1>
+          </header>
 
-    <!-- Main hero unit for a primary marketing message or call to action -->
-    <!--
-    <div class="hero-unit">
-      <h1>Hello, world!</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-    </div>
-    -->
+          <ul class="orders">
+            <li class="single"><a href="#">
+              <h2>Rob Howard</h2>
+            </a></li>
+            <li class="group"><a href="#">
+              <h2>Geoffrey Roberts</h2>
+            </a></li>
+          </ul>
 
-    <!-- Example row of columns -->
-    <!--
-    <div class="row">
-      <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="span4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
+          <hr />
+
+          <footer>
+            <p>&copy; SMASH! 2012</p>
+          </footer>
+
+        </div> <!-- /container -->
       </div>
     </div>
-    -->
 
-    <hr />
-
-    <footer>
-      <p>&copy; SMASH! 2012</p>
-    </footer>
-
-  </div> <!-- /container -->
+  </div> <!-- /panels-container -->
 
   <script src="js/lib/jquery-1.7.1.min.js"></script>
   <script src="js/bootstrap/transition.js"></script>
@@ -116,11 +155,23 @@
 
   <script>
     $(function(){
+      var form = $('#form');
       $('#submit').click(function(){
-        $('#search .tip').addClass('fold');
+        $('.tip', form).addClass('fold');
         $('#instructions').addClass('fold');
-        $('#results').addClass('loading').removeClass('fold');
+        var results = $('#results');
+        results.addClass('loading').removeClass('fold');
+        window.setTimeout(function(){
+          results.removeClass('loading').addClass('done');
+        }, 1000);
         return false;
+      });
+
+      $('.single').click(function(){
+        var search_panel = $('#search-panel');
+        var result_panel = $('#result-panel');
+        search_panel.addClass('left');
+        result_panel.removeClass('right');
       });
     });
   </script>
