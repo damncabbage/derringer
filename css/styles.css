@@ -2281,26 +2281,42 @@ a.thumbnail:hover { border-color: #0088cc; -webkit-box-shadow: 0 1px 4px rgba(0,
 #results > li { opacity: 0; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -ms-transition: opacity 0.5s; -o-transition: opacity 0.5s; transition: opacity 0.5s; }
 
 /* line 96, ../scss/styles.scss */
-.orders li { display: block; list-style: none; padding: 30px; margin-bottom: 10px; background: #ccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; }
+.orders > li { -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; display: block; list-style: none; padding: 20px; margin-bottom: 10px; background: #ccc; }
+/* line 104, ../scss/styles.scss */
+.orders > li a { *zoom: 1; display: block; text-decoration: none; color: #000; }
+/* line 38, ../vendor/bundler/gems/compass-0.12.rc.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.orders > li a:after { content: ""; display: table; clear: both; }
+/* line 110, ../scss/styles.scss */
+.orders > li .code { float: right; }
+/* line 113, ../scss/styles.scss */
+.orders > li p.others { float: left; margin-bottom: 0; }
+/* line 117, ../scss/styles.scss */
+.orders > li ul.others { float: left; margin-left: 6px; list-style: none; }
+/* line 122, ../scss/styles.scss */
+.orders > li ul.others li { float: left; padding-right: 3px; }
+/* line 123, ../scss/styles.scss */
+.orders > li ul.others li:after { content: ','; }
+/* line 124, ../scss/styles.scss */
+.orders > li ul.others li:last-child:after { content: '.'; }
 
-/* line 107, ../scss/styles.scss */
+/* line 130, ../scss/styles.scss */
 hr { margin-top: 180px; display: block; }
 
-/* line 112, ../scss/styles.scss */
+/* line 135, ../scss/styles.scss */
 .panels-container { position: absolute; overflow: hidden; width: 100%; height: 92%; }
 
-/* line 118, ../scss/styles.scss */
+/* line 141, ../scss/styles.scss */
 .panel-outer { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; background: #ff8888; left: -50%; }
 
-/* line 126, ../scss/styles.scss */
+/* line 149, ../scss/styles.scss */
 .panel-inner { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; left: 50%; }
 
-/* line 135, ../scss/styles.scss */
+/* line 158, ../scss/styles.scss */
 #search-panel.left { left: -100%; }
-/* line 137, ../scss/styles.scss */
+/* line 160, ../scss/styles.scss */
 #search-panel.left .panel-inner { left: 0%; }
 
-/* line 144, ../scss/styles.scss */
+/* line 167, ../scss/styles.scss */
 #result-panel.right { left: 0%; }
-/* line 146, ../scss/styles.scss */
+/* line 169, ../scss/styles.scss */
 #result-panel.right .panel-inner { left: 100%; }

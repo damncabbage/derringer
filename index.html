@@ -68,10 +68,37 @@
           </div>
 
           <ul id="results" class="fold orders">
-            <li class="single"><a href="#">
+            <li class="group"><a href="#">
+              <p class="code">S-14259XJPF</p>
               <h2>Rob Howard</h2>
+              <p class="others">With <span class="count">3 others</span>:</p>
+              <ul class="others">
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+              </ul>
             </a></li>
             <li class="group"><a href="#">
+              <p class="code">S-14259XJPF</p>
+              <h2>Rob Howard</h2>
+              <p class="others">With <span class="count">12 others</span>:</p>
+              <ul class="others">
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+              </ul>
+            </a></li>
+            <li class="single"><a href="#">
+              <p class="code">S-2145FP9JX</p>
               <h2>Geoffrey Roberts</h2>
             </a></li>
           </ul>
@@ -167,7 +194,7 @@
         return false;
       });
 
-      $('.single').click(function(){
+      $('.orders > li > a').click(function(){
         var search_panel = $('#search-panel');
         var result_panel = $('#result-panel');
         search_panel.addClass('left');
