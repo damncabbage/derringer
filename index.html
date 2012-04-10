@@ -67,6 +67,21 @@
             </div>
           </div>
 
+          <!-- Notification -->
+          <div class="message fold">
+            <h3>Done! you have <span class="scan-target">scanned Rob Howard.</span></h3>
+            <!--
+              <h3>Done! you have <span class="scan-target">scanned 4 people:</span></h3>
+              <ul>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+              </ul>
+            -->
+          </div>
+
+          <!-- Search Results -->
           <ul id="results" class="fold orders">
             <li class="group"><a href="#">
               <p class="code">S-14259XJPF</p>
@@ -143,11 +158,51 @@
       </div>
     </div>
 
-    <div id="result-panel" class="panel-outer right">
+    <div id="order-panel" class="panel-outer right">
       <div class="panel-inner">
         <div class="container">
-          <!-- TODO: Turbo / Quick Scan -->
 
+          <a class="back" href="#">&larr; Back</a>
+
+          <div class="together single-ticket">
+            <h2>Rob Howard</h2>
+            <div class="action">
+              <a class="btn btn-green btn-large">Everybody</a>
+            </div>
+            <div class="single-details">
+              <p>Male, 26</p><a href="#">More Details</a>
+              <ul class="fold">
+                <li><strong>Email:</strong> rob@robhoward.id.au</li>
+                <li><strong>Address:</strong> Foo St, Barville NSW 2000</li>
+              </ul>
+            </div>
+            <div class="group-details">
+              <p>Order with <span class="ticket-count">5</span> people:</p>
+              <ul> <!-- TODO: Float -->
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+                <li>Rob Howard</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="individual">
+            <p class="or-divider"><span>OR</span></p>
+
+            <ul class="orders">
+              <li></li>
+            </ul>
+          </div>
+
+          <div class="history">
+            <h3>Order History</h3>
+            <ul>
+              <li><time>3 March 2012</time>, paid for order by BPAY.</li>
+              <li><time>1 March 2012</time>, created order.</li>
+            </ul>
+          </div>
           <!-- The changing top-of-page instructions -->
           <header class="masthead">
             <h1 class="touch">Badda-bing:</h1>
@@ -196,7 +251,7 @@
 
       $('.orders > li > a').click(function(){
         var search_panel = $('#search-panel');
-        var result_panel = $('#result-panel');
+        var result_panel = $('#order-panel');
         search_panel.addClass('left');
         result_panel.removeClass('right');
       });

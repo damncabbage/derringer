@@ -2249,9 +2249,9 @@ a.thumbnail:hover { border-color: #0088cc; -webkit-box-shadow: 0 1px 4px rgba(0,
   /* line 314, ../vendor/bundler/gems/bootstrap-sass-2.0.1/vendor/assets/stylesheets/_bootstrap-responsive.scss */
   .thumbnails > li { margin-left: 30px; } }
 /* line 10, ../scss/styles.scss */
-.animated-hide, .masthead, #form .tip.touch, #results { -webkit-transition-property: opacity, height, padding; -moz-transition-property: opacity, height, padding; -ms-transition-property: opacity, height, padding; -o-transition-property: opacity, height, padding; transition-property: opacity, height, padding; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; opacity: 1; /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */ }
+.animated-hide, .masthead, #form .tip.touch, #results, .message { -webkit-transition-property: opacity, height, padding; -moz-transition-property: opacity, height, padding; -ms-transition-property: opacity, height, padding; -o-transition-property: opacity, height, padding; transition-property: opacity, height, padding; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; opacity: 1; /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */ }
 /* line 16, ../scss/styles.scss */
-.animated-hide.fold, .fold.masthead, #form .fold.tip.touch, .fold#results { opacity: 0; padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; }
+.animated-hide.fold, .fold.masthead, #form .fold.tip.touch, .fold#results, .fold.message { opacity: 0; padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; }
 
 /* line 24, ../scss/styles.scss */
 .masthead { padding: 60px 30px 30px; text-align: center; }
@@ -2269,54 +2269,60 @@ a.thumbnail:hover { border-color: #0088cc; -webkit-box-shadow: 0 1px 4px rgba(0,
 /* line 69, ../scss/styles.scss */
 #form .tip.mouse { display: none; }
 
-/* line 74, ../scss/styles.scss */
+/* Results list */
+/* line 75, ../scss/styles.scss */
 #results { min-height: 200px; }
-/* line 78, ../scss/styles.scss */
+/* line 79, ../scss/styles.scss */
 #results.fold { height: 0; }
-/* line 81, ../scss/styles.scss */
+/* line 82, ../scss/styles.scss */
 #results.loading { background: url('../img/loading.gif?1332672289') no-repeat center 50px; }
-/* line 85, ../scss/styles.scss */
+/* line 86, ../scss/styles.scss */
 #results.done > li { opacity: 1; }
-/* line 89, ../scss/styles.scss */
+/* line 90, ../scss/styles.scss */
 #results > li { opacity: 0; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -ms-transition: opacity 0.5s; -o-transition: opacity 0.5s; transition: opacity 0.5s; }
 
-/* line 96, ../scss/styles.scss */
+/* Orders list (usually also the results list) */
+/* line 98, ../scss/styles.scss */
 .orders > li { -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; display: block; list-style: none; padding: 20px; margin-bottom: 10px; background: #ccc; }
-/* line 104, ../scss/styles.scss */
+/* line 106, ../scss/styles.scss */
 .orders > li a { *zoom: 1; display: block; text-decoration: none; color: #000; }
 /* line 38, ../vendor/bundler/gems/compass-0.12.rc.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .orders > li a:after { content: ""; display: table; clear: both; }
-/* line 110, ../scss/styles.scss */
-.orders > li .code { float: right; }
-/* line 113, ../scss/styles.scss */
+/* line 112, ../scss/styles.scss */
+.orders > li .code { float: right; font-size: 1.4em; padding-top: 8px; color: #666; }
+/* line 118, ../scss/styles.scss */
 .orders > li p.others { float: left; margin-bottom: 0; }
-/* line 117, ../scss/styles.scss */
-.orders > li ul.others { float: left; margin-left: 6px; list-style: none; }
 /* line 122, ../scss/styles.scss */
+.orders > li ul.others { float: left; margin-left: 6px; list-style: none; }
+/* line 127, ../scss/styles.scss */
 .orders > li ul.others li { float: left; padding-right: 3px; }
-/* line 123, ../scss/styles.scss */
+/* line 128, ../scss/styles.scss */
 .orders > li ul.others li:after { content: ','; }
-/* line 124, ../scss/styles.scss */
+/* line 129, ../scss/styles.scss */
 .orders > li ul.others li:last-child:after { content: '.'; }
 
-/* line 130, ../scss/styles.scss */
+/* Notification */
+/* line 136, ../scss/styles.scss */
+.message { padding-left: 30px; /* TODO: background sprite */ }
+
+/* line 143, ../scss/styles.scss */
 hr { margin-top: 180px; display: block; }
 
-/* line 135, ../scss/styles.scss */
+/* line 148, ../scss/styles.scss */
 .panels-container { position: absolute; overflow: hidden; width: 100%; height: 92%; }
 
-/* line 141, ../scss/styles.scss */
+/* line 154, ../scss/styles.scss */
 .panel-outer { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; background: #ff8888; left: -50%; }
 
-/* line 149, ../scss/styles.scss */
+/* line 162, ../scss/styles.scss */
 .panel-inner { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; left: 50%; }
 
-/* line 158, ../scss/styles.scss */
+/* line 171, ../scss/styles.scss */
 #search-panel.left { left: -100%; }
-/* line 160, ../scss/styles.scss */
+/* line 173, ../scss/styles.scss */
 #search-panel.left .panel-inner { left: 0%; }
 
-/* line 167, ../scss/styles.scss */
-#result-panel.right { left: 0%; }
-/* line 169, ../scss/styles.scss */
-#result-panel.right .panel-inner { left: 100%; }
+/* line 180, ../scss/styles.scss */
+#order-panel.right { left: 0%; }
+/* line 182, ../scss/styles.scss */
+#order-panel.right .panel-inner { left: 100%; }

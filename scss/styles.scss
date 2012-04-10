@@ -71,6 +71,7 @@
   }
 }
 
+/* Results list */
 #results {
   @extend .animated-hide;
   min-height: 200px;
@@ -92,6 +93,7 @@
   }
 }
 
+/* Orders list (usually also the results list) */
 .orders {
   & > li {
     @include border-radius(5px);
@@ -109,6 +111,9 @@
     }
     .code {
       float: right;
+      font-size: 1.4em;
+      padding-top: 8px;
+      color: #666;
     }
     p.others {
       float: left;
@@ -124,6 +129,14 @@
       li:last-child:after { content: '.'; }
     }
   }
+}
+
+
+/* Notification */
+.message {
+  @extend .animated-hide;
+  padding-left: 30px;
+  /* TODO: background sprite */
 }
 
 
@@ -163,7 +176,7 @@ hr {
   }
 }
 
-#result-panel {
+#order-panel {
   &.right {
     left: 0%;
     .panel-inner {
