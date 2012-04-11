@@ -11,7 +11,7 @@ require 'rake'
 
 namespace :coffee do
   task :watch do
-    puts `coffee --watch --compile --output js/ coffee/`
+    puts `coffee --watch --compile --output build/ *.coffee`
   end
 end
 
