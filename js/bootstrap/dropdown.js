@@ -39,7 +39,7 @@
 
   , toggle: function ( e ) {
       var $this = $(this)
-        , selector = $this.attr('data-target')
+        , selector = $this.attr('data-dropdown-target')
         , $parent
         , isActive
 
