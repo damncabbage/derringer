@@ -12,6 +12,31 @@ class Derringer extends Batman.App
   @root 'app#index'
 
 
+#### Models ####
+
+class Derringer.Order extends Batman.Model
+  @global yes
+  @persist Batman.LocalStorage
+  @hasMany 'tickets'
+  @encode 'id', 'code', 'full_name', 'history', 'created_at', 'updated_at'
+  #@encode 'created_at', 'updated_at', Batman.Encoders.railsDate
+
+class Derringer.Ticket extends Batman.Model
+  @global yes
+  @persist Batman.LocalStorage
+  @belongsTo 'order'
+  @hasMany 'scans'
+  @encode 'id', 'code', 'full_name', 'gender', 'age', 'created_at', 'updated_at'
+  #@encode 'created_at', 'updated_at', Batman.Encoders.railsDate
+
+class Derringer.Scan extends Batman.Model
+  @global yes
+  @persist Batman.LocalStorage
+  @belongsTo 'ticket'
+  @encode 'id', 'booth', 'created_at'
+  #@encode 'created_at', Batman.Encoders.railsDate
+
+
 #### Controllers ####
 
 class Derringer.AppController extends Batman.Controller
