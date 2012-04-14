@@ -1,3 +1,5 @@
+#### App ####
+
 class Derringer extends Batman.App
   @set 'mission', 'fight crime'
 
@@ -6,6 +8,32 @@ class Derringer extends Batman.App
   @global yes
 
   # Source the AppController and set the root route to AppController#index.
-  @controller 'app'
+  #@controller 'app'
   @root 'app#index'
+
+
+#### Controllers ####
+
+class Derringer.AppController extends Batman.Controller
+  index: ->
+
+   search: (params) ->
+
+   order: (params) ->
+
+   ticket: (params) ->
+
+   # Routes can optionally be declared inline with the callback on the controller:
+   #
+   # order: @route('/order/:id', (params) -> ... )
+   # ticket: @route('/ticket/:id', (params) -> ... )
+
+   # Add functions to run before an action with
+   #
+   # @beforeFilter 'someFunctionKey'  # or
+   # @beforeFilter -> ...
+
+
+
+
 
