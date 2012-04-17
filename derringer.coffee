@@ -2,13 +2,15 @@
 
 class Derringer extends Batman.App
   @set 'search', 'Rob'
+  @set 'results', []
+  @set 'result', null
 
   # Make Derringerbm available in the global namespace so it can be used
   # as a namespace and bound to in views.
   @global yes
 
-  # Source the AppController and set the root route to AppController#index.
-  #@controller 'app'
+  # Routes
+  @route 'search/:term', 'app#search'
   @root 'app#index'
 
 
@@ -19,7 +21,6 @@ class Derringer.Order extends Batman.Model
   @persist Batman.LocalStorage
   @hasMany 'tickets'
   @encode 'id', 'code', 'full_name', 'history', 'created_at', 'updated_at'
-  #@encode 'created_at', 'updated_at', Batman.Encoders.railsDate
 
 class Derringer.Ticket extends Batman.Model
   @global yes
@@ -27,20 +28,27 @@ class Derringer.Ticket extends Batman.Model
   @belongsTo 'order'
   @hasMany 'scans'
   @encode 'id', 'code', 'full_name', 'gender', 'age', 'created_at', 'updated_at'
-  #@encode 'created_at', 'updated_at', Batman.Encoders.railsDate
 
 class Derringer.Scan extends Batman.Model
   @global yes
   @persist Batman.LocalStorage
   @belongsTo 'ticket'
   @encode 'id', 'booth', 'created_at'
-  #@encode 'created_at', Batman.Encoders.railsDate
+
+
+#### Widgets ####
+
+class Derringer.SearchBox extends Batman.Object
+  @set 'value', ''
+
+# class Derringer
 
 
 #### Controllers ####
 
 class Derringer.AppController extends Batman.Controller
   index: ->
+    resetSearch()
     Order.load (error, orders) ->
       unless orders and orders.length
         callback = (error) -> throw error if error
@@ -64,24 +72,66 @@ class Derringer.AppController extends Batman.Controller
         t.save(callback) for t in o2.get('tickets').toArray()
 
 
+  search: (params) ->
+      startSearch()
+      terms = getValueFromFormParams(params, 'terms')
+      # Really dumb search that barely works, isn't going to scale and
+      # doesn't even hit persistent storage.
+      Order.load (error, orders) ->
+        results = (order for order in orders when order.get('full_name').toLowerCase().indexOf(terms.toLowerCase()) >= 0)
+        window.Derringer.set 'results', results
+        finishSearch()
 
-   search: (params) ->
+  order: (params) ->
 
-   order: (params) ->
+  ticket: (params) ->
 
-   ticket: (params) ->
+  # Routes can optionally be declared inline with the callback on the controller:
+  #
+  # order: @route('/order/:id', (params) -> ... )
+  # ticket: @route('/ticket/:id', (params) -> ... )
 
-   # Routes can optionally be declared inline with the callback on the controller:
-   #
-   # order: @route('/order/:id', (params) -> ... )
-   # ticket: @route('/ticket/:id', (params) -> ... )
+  # Add functions to run before an action with
+  #
+  # @beforeFilter 'someFunctionKey'  # or
+  # @beforeFilter -> ...
 
-   # Add functions to run before an action with
-   #
-   # @beforeFilter 'someFunctionKey'  # or
-   # @beforeFilter -> ...
+  # HACK: Because Batman.js is sometimes terrible and has no documentation.
+  # ... And gives you different things depending if it's a form
+  # submit or a "get" request via data-route.
+  # (tl;dr Controller params can be a form element or a straight value. :-| )
+  getValueFromFormParams = (params, param) ->
+    value = null
+    if params[param]?
+      if params[param].value?
+        value = params[param].value
+      else
+        value = params[param]
+    value
+
+  # Search animation helpers
+  resetSearch = ->
+    frm = $('#form')
+    $('.tip', frm).removeClass('fold')
+    $('#instructions').removeClass('fold')
+    $('#results').addClass('fold').removeClass('loading').removeClass('done')
+
+  startSearch = ->
+    frm = $('#form')
+    $('.tip', frm).addClass('fold')
+    $('#instructions').addClass('fold')
+    $('#results').addClass('loading').removeClass('fold')
+
+  finishSearch = ->
+    $('#results').removeClass('loading').addClass('done')
 
 
+  # Panel-slide animation helpers
+  activateSearchPanel = ->
+    $('#search-panel').removeClass('left')
+    $('#result-panel').addClass('right')
 
-
+  activateOrderPanel = ->
+    $('#search-panel').addClass('left')
+    $('#result-panel').removeClass('right')
 

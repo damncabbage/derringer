@@ -65,8 +65,8 @@
           <!-- The search form -->
           <div id="form">
             <div class="inputs">
-              <form>
-                <input id="search" name="search" type="text" class="text" placeholder="" data-bind="window.Derringer.search" />
+              <form method="get" data-event-submit="controllers.app.search">
+                <input id="terms" name="terms" type="text" class="text" placeholder="" data-bind="window.Derringer.search" />
                 <input id="submit" name="submit" type="submit" class="submit" value="Go" />
               </form>
               <div class="tip touch">Tap here to get started.</div>
@@ -239,7 +239,7 @@
   <script>
     $(function(){
       Derringer.run();
-
+/*
       var form = $('#form');
       $('#submit').click(function(){
         $('.tip', form).addClass('fold');
@@ -258,6 +258,7 @@
         search_panel.addClass('left');
         result_panel.removeClass('right');
       });
+*/
     });
   </script>
 </body>

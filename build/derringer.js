@@ -14,16 +14,242 @@
       return Derringer.__super__.constructor.apply(this, arguments);
     }
 
-    Derringer.set('mission', 'fight crime');
+    Derringer.set('search', 'Rob');
+
+    Derringer.set('results', []);
+
+    Derringer.set('result', null);
 
     Derringer.global(true);
 
-    Derringer.controller('app');
+    Derringer.route('search/:term', 'app#search');
 
     Derringer.root('app#index');
 
     return Derringer;
 
   })(Batman.App);
+
+  Derringer.Order = (function(_super) {
+
+    __extends(Order, _super);
+
+    Order.name = 'Order';
+
+    function Order() {
+      return Order.__super__.constructor.apply(this, arguments);
+    }
+
+    Order.global(true);
+
+    Order.persist(Batman.LocalStorage);
+
+    Order.hasMany('tickets');
+
+    Order.encode('id', 'code', 'full_name', 'history', 'created_at', 'updated_at');
+
+    return Order;
+
+  })(Batman.Model);
+
+  Derringer.Ticket = (function(_super) {
+
+    __extends(Ticket, _super);
+
+    Ticket.name = 'Ticket';
+
+    function Ticket() {
+      return Ticket.__super__.constructor.apply(this, arguments);
+    }
+
+    Ticket.global(true);
+
+    Ticket.persist(Batman.LocalStorage);
+
+    Ticket.belongsTo('order');
+
+    Ticket.hasMany('scans');
+
+    Ticket.encode('id', 'code', 'full_name', 'gender', 'age', 'created_at', 'updated_at');
+
+    return Ticket;
+
+  })(Batman.Model);
+
+  Derringer.Scan = (function(_super) {
+
+    __extends(Scan, _super);
+
+    Scan.name = 'Scan';
+
+    function Scan() {
+      return Scan.__super__.constructor.apply(this, arguments);
+    }
+
+    Scan.global(true);
+
+    Scan.persist(Batman.LocalStorage);
+
+    Scan.belongsTo('ticket');
+
+    Scan.encode('id', 'booth', 'created_at');
+
+    return Scan;
+
+  })(Batman.Model);
+
+  Derringer.SearchBox = (function(_super) {
+
+    __extends(SearchBox, _super);
+
+    SearchBox.name = 'SearchBox';
+
+    function SearchBox() {
+      return SearchBox.__super__.constructor.apply(this, arguments);
+    }
+
+    SearchBox.set('value', '');
+
+    return SearchBox;
+
+  })(Batman.Object);
+
+  Derringer.AppController = (function(_super) {
+    var activateOrderPanel, activateSearchPanel, finishSearch, getValueFromFormParams, resetSearch, startSearch;
+
+    __extends(AppController, _super);
+
+    AppController.name = 'AppController';
+
+    function AppController() {
+      return AppController.__super__.constructor.apply(this, arguments);
+    }
+
+    AppController.prototype.index = function() {
+      resetSearch();
+      return Order.load(function(error, orders) {
+        var callback, o1, o2, t, _i, _j, _len, _len1, _ref, _ref1, _results;
+        if (!(orders && orders.length)) {
+          callback = function(error) {
+            if (error) {
+              throw error;
+            }
+          };
+          t = new Ticket({
+            full_name: 'Rob Howard',
+            code: 'S1-1231234X-0041'
+          });
+          o1 = new Order({
+            full_name: "Rob Howard",
+            code: 'S1-1231234X'
+          });
+          o1.set('tickets', new Batman.Set(new Derringer.Ticket({
+            full_name: 'Rob Howard',
+            code: 'S1-1231234X-0041'
+          }), new Derringer.Ticket({
+            full_name: 'Andrew Howard',
+            code: 'S1-1231234X-0042'
+          })));
+          o1.save(callback);
+          _ref = o1.get('tickets').toArray();
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            t = _ref[_i];
+            t.save(callback);
+          }
+          o2 = new Order({
+            full_name: "Geoffrey Roberts",
+            code: 'S1-23214X13'
+          });
+          o2.set('tickets', new Batman.Set(new Ticket({
+            full_name: 'Michael Camilleri',
+            code: 'S1-23214X13-0062'
+          }), new Ticket({
+            full_name: 'Thomas Munro',
+            code: 'S1-23214X13-006F'
+          })));
+          o2.save(callback);
+          _ref1 = o2.get('tickets').toArray();
+          _results = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            t = _ref1[_j];
+            _results.push(t.save(callback));
+          }
+          return _results;
+        }
+      });
+    };
+
+    AppController.prototype.search = function(params) {
+      var terms;
+      startSearch();
+      terms = getValueFromFormParams(params, 'terms');
+      return Order.load(function(error, orders) {
+        var order, results;
+        results = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = orders.length; _i < _len; _i++) {
+            order = orders[_i];
+            if (order.get('full_name').toLowerCase().indexOf(terms.toLowerCase()) >= 0) {
+              _results.push(order);
+            }
+          }
+          return _results;
+        })();
+        window.Derringer.set('results', results);
+        return finishSearch();
+      });
+    };
+
+    AppController.prototype.order = function(params) {};
+
+    AppController.prototype.ticket = function(params) {};
+
+    getValueFromFormParams = function(params, param) {
+      var value;
+      value = null;
+      if (params[param] != null) {
+        if (params[param].value != null) {
+          value = params[param].value;
+        } else {
+          value = params[param];
+        }
+      }
+      return value;
+    };
+
+    resetSearch = function() {
+      var frm;
+      frm = $('#form');
+      $('.tip', frm).removeClass('fold');
+      $('#instructions').removeClass('fold');
+      return $('#results').addClass('fold').removeClass('loading').removeClass('done');
+    };
+
+    startSearch = function() {
+      var frm;
+      frm = $('#form');
+      $('.tip', frm).addClass('fold');
+      $('#instructions').addClass('fold');
+      return $('#results').addClass('loading').removeClass('fold');
+    };
+
+    finishSearch = function() {
+      return $('#results').removeClass('loading').addClass('done');
+    };
+
+    activateSearchPanel = function() {
+      $('#search-panel').removeClass('left');
+      return $('#result-panel').addClass('right');
+    };
+
+    activateOrderPanel = function() {
+      $('#search-panel').addClass('left');
+      return $('#result-panel').removeClass('right');
+    };
+
+    return AppController;
+
+  })(Batman.Controller);
 
 }).call(this);
