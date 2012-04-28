@@ -90,6 +90,19 @@
 
           <!-- Search Results -->
           <ul id="results" class="fold orders">
+            <li data-foreach-order="results" class="group"><a data-route="order">
+              <p class="code" data-bind="order.code"></p>
+              <h2 data-bind="order.full_name"></h2>
+              <p class="others">With <span class="count">3 others</span>:</p>
+              <ul class="others">
+                <li>Some Guy</li>
+                <li>Some Other Guy</li>
+                <li>Him Too</li>
+              </ul>
+            </a></li>
+          </ul>
+          <!--
+          <ul id="results" class="fold orders">
             <li class="group"><a href="#">
               <p class="code">S-14259XJPF</p>
               <h2>Rob Howard</h2>
@@ -124,6 +137,7 @@
               <h2>Geoffrey Roberts</h2>
             </a></li>
           </ul>
+          -->
 
           <!-- Main hero unit for a primary marketing message or call to action -->
           <!--
