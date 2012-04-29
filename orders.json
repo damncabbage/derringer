@@ -1,34 +1,34 @@
 [{
-  code: 'S1-1231234X',
-  full_name: 'Rob Howard',
-  tickets: [{
-    code: 'S1-1231234X-0041',
-    full_name: 'Rob Howard',
-    gender: 'Male',
-    age: '27',
+  "code": "S1-1231234X",
+  "full_name": "Rob Howard",
+  "tickets": [{
+    "code": "S1-1231234X-0041",
+    "full_name": "Rob Howard",
+    "gender": "Male",
+    "age": "27"
   },{
-    code: 'S1-1231234X-0042',
-    full_name: 'Andrew Howard',
-    gender: 'Male',
-    age: '25',
-  }],
+    "code": "S1-1231234X-0042",
+    "full_name": "Andrew Howard",
+    "gender": "Male",
+    "age": "25"
+  }]
 },{
-  code: 'S1-5825843Z',
-  full_name: 'Geoffrey Roberts',
-  tickets: [{
-    code: 'S1-5825843Z-006E',
-    full_name: 'Michael Camilleri',
-    gender: 'Not Telling',
-    age: '29',
+  "code": "S1-5825843Z",
+  "full_name": "Geoffrey Roberts",
+  "tickets": [{
+    "code": "S1-5825843Z-006E",
+    "full_name": "Michael Camilleri",
+    "gender": "Not Telling",
+    "age": "29"
   },{
-    code: 'S1-5825843Z-006F',
-    full_name: 'Thomas Munro',
-    gender: 'Male',
-    age: '18',
+    "code": "S1-5825843Z-006F",
+    "full_name": "Thomas Munro",
+    "gender": "Male",
+    "age": "18"
   },{
-    code: 'S1-5825843Z-0070',
-    full_name: 'Nadia Attlee',
-    gender: 'Female',
-    age: '25',
-  },{
+    "code": "S1-5825843Z-0070",
+    "full_name": "Nadia Attlee",
+    "gender": "Female",
+    "age": "25"
+  }]
 }]
