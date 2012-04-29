@@ -34,16 +34,23 @@
         this.orderSearchView.terms = "";
         this.orderSearchView.render();
         $('#result-panel').addClass('right');
-        return $('#search-panel').removeClass('left').removeClass('show-results');
+        $('#search-panel').removeClass('left').removeClass('show-results');
+        return $('#terms').focus();
       };
 
       Derringer.prototype.search = function(terms) {
+        var $results;
         this.orderSearchView.terms = terms;
-        console.log(this.orderSearchView);
         this.orderSearchView.collection.forTerms(terms);
         this.orderSearchView.render();
         $('#result-panel').addClass('right');
-        return $('#search-panel').removeClass('left').addClass('show-results');
+        $('#search-panel').removeClass('left').addClass('show-results');
+        $results = $('#search-results');
+        $results.addClass('loading');
+        window.setTimeout(function() {
+          return $results.removeClass('loading').addClass('done');
+        }, 1500);
+        return $('#terms').focus();
       };
 
       Derringer.prototype.order = function(id) {

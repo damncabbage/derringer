@@ -82,12 +82,9 @@ body {
 }
 
 /* Results list */
-#results {
+#search-results {
   min-height: 200px;
 
-  &.fold {
-    height: 0;
-  }
   &.loading {
     background: image-url('loading.gif') no-repeat center 50px;
   }
@@ -149,12 +146,22 @@ body {
 
 /****** Animation *****/
 #search-panel {
-  .tip, #results, .message, .masthead {
+  /* Show Instructions, Hide Results */
+  .tip, .message, .masthead {
     @extend .animated-hide-open;
   }
+  #search-results {
+    @extend .animated-hide-fold;
+    height: 0;
+  }
+
+  /* Hide Instructions, Show Results */
   &.show-results {
-    .tip, #results, .message, .masthead {
+    .tip, .message, .masthead {
       @extend .animated-hide-fold;
+    }
+    #search-results {
+      @extend .animated-hide-open;
     }
   }
 }

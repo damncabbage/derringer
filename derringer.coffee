@@ -24,22 +24,27 @@
     index: ->
       this.orderSearchView.terms = "" 
       this.orderSearchView.render()
+
       $('#result-panel').addClass('right')
       $('#search-panel').removeClass('left').removeClass('show-results')
-
-      #$('#search-results').addClass('fold').removeClass('loading').removeClass('done')
+      $('#terms').focus()
 
 
     search: (terms) ->
       this.orderSearchView.terms = terms
-      console.log(this.orderSearchView)
       this.orderSearchView.collection.forTerms(terms)
       this.orderSearchView.render()
+
       $('#result-panel').addClass('right')
       $('#search-panel').removeClass('left').addClass('show-results')
 
-#      $results.addClass('loading')
-#      $results.removeClass('loading').addClass('done')
+      $results = $('#search-results')
+      $results.addClass('loading');
+      window.setTimeout(->
+        $results.removeClass('loading').addClass('done');
+      , 1500)
+
+      $('#terms').focus()
 
 
     order: (id) ->
