@@ -233,9 +233,9 @@
 
       OrderSearchView.prototype.render = function(event) {
         this.$el.html(this.template({
-          terms: this.terms || "",
           collection: this.collection.toJSON()
         }));
+        this.$el.find('#terms').val(this.terms || "");
         return this;
       };
 

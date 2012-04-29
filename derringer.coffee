@@ -132,10 +132,11 @@
       this.template = _.template $('#search-template').html()
 
     render: (event) =>
-      this.$el.html this.template({
-        terms: (this.terms || "")
+      this.$el.html this.template(
         collection: this.collection.toJSON()
-      })
+      )
+      # Safely set the value.
+      this.$el.find('#terms').val((this.terms || ""))
       return this
 
     events: {
