@@ -7,28 +7,39 @@
 @import "compass/css3";
 
 // Helpers
-.animated-hide {
+.animated-hide-open {
   @include transition-property('opacity, height, padding');
   @include transition-duration(0.5s);
   opacity: 1;
-
+}
+.animated-hide-fold {
+  opacity: 0;
+  padding-top: 0; padding-bottom: 0;
+  margin-top: 0; margin-bottom: 0;
+}
+.animated-hide {
+  @extend .animated-hide-open;
   /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */
   &.fold {
-    opacity: 0;
-    padding-top: 0; padding-bottom: 0;
-    margin-top: 0; margin-bottom: 0;
+    @extend .animated-hide-fold;
   }
 }
 
 
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
 .masthead {
-  @extend .animated-hide;
   padding: 60px 30px 30px;
   text-align: center;
 }
 
-// Search
-#form {
+
+/***** Search *****/
+
+#search-form {
   @extend .row;
   margin-bottom: 45px;
 
@@ -60,7 +71,6 @@
   }
 
   .tip.touch {
-    @extend .animated-hide;
     @include replace-text-with-dimensions('tap-here.png');
     position: absolute;
     top: image-height('tap-here.png') - 20px;
@@ -73,7 +83,6 @@
 
 /* Results list */
 #results {
-  @extend .animated-hide;
   min-height: 200px;
 
   &.fold {
@@ -131,12 +140,23 @@
   }
 }
 
-
 /* Notification */
 .message {
-  @extend .animated-hide;
   padding-left: 30px;
   /* TODO: background sprite */
+}
+
+
+/****** Animation *****/
+#search-panel {
+  .tip, #results, .message, .masthead {
+    @extend .animated-hide-open;
+  }
+  &.show-results {
+    .tip, #results, .message, .masthead {
+      @extend .animated-hide-fold;
+    }
+  }
 }
 
 
