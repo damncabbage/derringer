@@ -2258,83 +2258,84 @@ a.thumbnail:hover { border-color: #0088cc; -webkit-box-shadow: 0 1px 4px rgba(0,
 .animated-hide { /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */ }
 
 /* line 29, ../scss/styles.scss */
-body { padding-top: 60px; padding-bottom: 40px; }
+body { padding-bottom: 20px; }
 
-/* line 34, ../scss/styles.scss */
+/* line 33, ../scss/styles.scss */
 .masthead { padding: 60px 30px 30px; text-align: center; }
 
 /***** Search *****/
-/* line 42, ../scss/styles.scss */
+/* line 41, ../scss/styles.scss */
 #search-form { margin-bottom: 45px; }
-/* line 46, ../scss/styles.scss */
+/* line 45, ../scss/styles.scss */
 #search-form .inputs { position: relative; background: #ccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 9px 9px 0 9px; }
-/* line 54, ../scss/styles.scss */
+/* line 53, ../scss/styles.scss */
 #search-form .inputs .text { padding: 12px 8px; line-height: 22px; height: 22px; font-size: 20px; }
-/* line 62, ../scss/styles.scss */
+/* line 61, ../scss/styles.scss */
 #search-form .inputs .submit { float: right; font-size: 20px; padding: 11px 15px; }
-/* line 73, ../scss/styles.scss */
+/* line 72, ../scss/styles.scss */
 #search-form .tip.touch { text-indent: -119988px; overflow: hidden; text-align: left; background-image: url('../img/tap-here.png?1332663365'); background-repeat: no-repeat; background-position: 50% 50%; width: 504px; height: 88px; position: absolute; top: 68px; right: 0px; }
-/* line 79, ../scss/styles.scss */
+/* line 78, ../scss/styles.scss */
 #search-form .tip.mouse { display: none; }
 
 /* Results list */
-/* line 85, ../scss/styles.scss */
+/* line 84, ../scss/styles.scss */
 #search-results { min-height: 200px; }
-/* line 88, ../scss/styles.scss */
+/* line 87, ../scss/styles.scss */
 #search-results.loading { background: url('../img/loading.gif?1332672289') no-repeat center 50px; }
-/* line 92, ../scss/styles.scss */
+/* line 91, ../scss/styles.scss */
 #search-results.done > li { opacity: 1; }
-/* line 96, ../scss/styles.scss */
+/* line 95, ../scss/styles.scss */
 #search-results > li { opacity: 0; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -ms-transition: opacity 0.5s; -o-transition: opacity 0.5s; transition: opacity 0.5s; }
 
 /* Orders list (usually also the results list) */
-/* line 104, ../scss/styles.scss */
-.orders > li { -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; display: block; list-style: none; padding: 20px; margin-bottom: 10px; background: #ccc; }
-/* line 112, ../scss/styles.scss */
-.orders > li a { *zoom: 1; display: block; text-decoration: none; color: #000; }
+/* line 103, ../scss/styles.scss */
+.orders > li { *zoom: 1; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; display: block; list-style: none; padding: 20px; margin-bottom: 10px; background: #ccc; cursor: pointer; }
 /* line 38, ../vendor/bundler/gems/compass-0.12.rc.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-.orders > li a:after { content: ""; display: table; clear: both; }
-/* line 118, ../scss/styles.scss */
+.orders > li:after { content: ""; display: table; clear: both; }
+/* line 113, ../scss/styles.scss */
 .orders > li .code { float: right; font-size: 1.4em; padding-top: 8px; color: #666; }
-/* line 124, ../scss/styles.scss */
+/* line 119, ../scss/styles.scss */
 .orders > li p.others { float: left; margin-bottom: 0; }
-/* line 128, ../scss/styles.scss */
+/* line 123, ../scss/styles.scss */
 .orders > li ul.others { float: left; margin-left: 6px; list-style: none; }
-/* line 133, ../scss/styles.scss */
+/* line 128, ../scss/styles.scss */
 .orders > li ul.others li { float: left; padding-right: 3px; }
-/* line 134, ../scss/styles.scss */
+/* line 129, ../scss/styles.scss */
 .orders > li ul.others li:after { content: ','; }
-/* line 135, ../scss/styles.scss */
+/* line 130, ../scss/styles.scss */
 .orders > li ul.others li:last-child:after { content: '.'; }
 
 /* Notification */
-/* line 141, ../scss/styles.scss */
+/* line 136, ../scss/styles.scss */
 .message { padding-left: 30px; /* TODO: background sprite */ }
 
 /****** Animation *****/
-/* line 148, ../scss/styles.scss */
+/* line 143, ../scss/styles.scss */
 #search-panel { /* Show Instructions, Hide Results */ /* Hide Instructions, Show Results */ }
-/* line 153, ../scss/styles.scss */
+/* line 148, ../scss/styles.scss */
 #search-panel #search-results { height: 0; }
 
-/* line 170, ../scss/styles.scss */
+/* line 165, ../scss/styles.scss */
 hr { margin-top: 180px; display: block; }
 
-/* line 175, ../scss/styles.scss */
-.panels-container { position: absolute; overflow: hidden; width: 100%; height: 92%; }
+/* line 170, ../scss/styles.scss */
+.panels-container { position: absolute; overflow: hidden; width: 100%; height: 92%; padding-top: 60px; }
 
-/* line 181, ../scss/styles.scss */
+/* line 177, ../scss/styles.scss */
+html.appleios .panels-container { padding-top: 30px; }
+
+/* line 179, ../scss/styles.scss */
 .panel-outer { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; background: #ff8888; left: -50%; }
 
-/* line 189, ../scss/styles.scss */
+/* line 187, ../scss/styles.scss */
 .panel-inner { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; left: 50%; }
 
-/* line 198, ../scss/styles.scss */
+/* line 196, ../scss/styles.scss */
 #search-panel.left { left: -100%; }
-/* line 200, ../scss/styles.scss */
+/* line 198, ../scss/styles.scss */
 #search-panel.left .panel-inner { left: 0%; }
 
-/* line 207, ../scss/styles.scss */
+/* line 205, ../scss/styles.scss */
 #order-panel.right { left: 0%; }
-/* line 209, ../scss/styles.scss */
+/* line 207, ../scss/styles.scss */
 #order-panel.right .panel-inner { left: 100%; }

@@ -20,7 +20,7 @@
       Derringer.prototype.routes = {
         '': 'index',
         'search/': 'index',
-        'search/:terms': 'search',
+        'search/*terms': 'search',
         'orders/:id': 'order'
       };
 
@@ -33,33 +33,42 @@
       Derringer.prototype.index = function() {
         this.orderSearchView.terms = "";
         this.orderSearchView.render();
-        $('#result-panel').addClass('right');
+        $('#order-panel').addClass('right');
         $('#search-panel').removeClass('left').removeClass('show-results');
         return $('#terms').focus();
       };
 
       Derringer.prototype.search = function(terms) {
-        var $results;
-        this.orderSearchView.terms = terms;
-        this.orderSearchView.collection.forTerms(terms);
-        this.orderSearchView.render();
-        $('#result-panel').addClass('right');
+        var _this = this;
+        this.orderSearchView.terms = unescape(terms);
+        $('#order-panel').addClass('right');
         $('#search-panel').removeClass('left').addClass('show-results');
-        $results = $('#search-results');
-        $results.addClass('loading');
-        window.setTimeout(function() {
-          return $results.removeClass('loading').addClass('done');
-        }, 1500);
-        return $('#terms').focus();
+        $('#search-results').addClass('loading');
+        return window.orders.fetch({
+          url: '/orders.json',
+          success: function(collection, response) {
+            _this.orderSearchView.collection = window.orders;
+            _this.orderSearchView.render();
+            $('#search-results').removeClass('loading').addClass('done');
+            return $('#terms').focus();
+          }
+        });
       };
 
       Derringer.prototype.order = function(id) {
-        var item, view;
+        var _this = this;
         $('#search-panel').addClass('left');
-        $('#result-panel').removeClass('right');
-        item = Orders.get(id);
-        return view = new OrderView({
-          model: item
+        $('#order-panel').removeClass('right');
+        return window.orders.fetch({
+          url: '/orders.json',
+          success: function(collection, response) {
+            var order, view;
+            order = window.orders.get(id);
+            view = new OrderView({
+              model: order
+            });
+            return view.render();
+          }
         });
       };
 
@@ -205,7 +214,13 @@
         'click .confirm': 'confirm'
       };
 
-      OrderView.prototype.back = function(event) {};
+      OrderView.prototype.back = function(event) {
+        if (window.history.length > 0) {
+          return window.history.back();
+        } else {
+          return window.App.navigate('/', true);
+        }
+      };
 
       OrderView.prototype.confirm = function(event) {};
 
@@ -245,14 +260,17 @@
       };
 
       OrderSearchView.prototype.search = function(event) {
-        var $input, newUrl;
+        var $input;
         event.preventDefault();
         $input = $(event.target).find('#terms');
-        newUrl = '/search/' + escape($input.val());
-        return window.App.navigate(newUrl, true);
+        return window.App.navigate("/search/" + (escape($input.val())), true);
       };
 
-      OrderSearchView.prototype.select = function(event) {};
+      OrderSearchView.prototype.select = function(event) {
+        var id;
+        id = $(event.target).closest('.order').attr('data-id');
+        return window.App.navigate("/orders/" + (escape(id)), true);
+      };
 
       return OrderSearchView;
 

@@ -27,8 +27,7 @@
 
 
 body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .masthead {
@@ -102,19 +101,15 @@ body {
 /* Orders list (usually also the results list) */
 .orders {
   & > li {
+    @include pie-clearfix;
     @include border-radius(5px);
     display: block;
     list-style: none;
     padding: 20px;
     margin-bottom: 10px;
     background: #ccc;
+    cursor: pointer;
 
-    a {
-      @include pie-clearfix;
-      display: block;
-      text-decoration: none;
-      color: #000;
-    }
     .code {
       float: right;
       font-size: 1.4em;
@@ -177,7 +172,10 @@ hr {
   overflow: hidden;
   width: 100%;
   height: 92%;
+  padding-top: 60px;
 }
+html.appleios .panels-container { padding-top: 30px; }
+
 .panel-outer {
   @include transition-property(left);
   @include transition-duration(0.5s);

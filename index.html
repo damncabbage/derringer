@@ -13,6 +13,22 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="apple-touch-icon" size="114x114" href="apple-touch-icon-114x114.png" />
 
+  <script src="lib/modernizr-2.5.3.js"></script>
+  <script>
+    Modernizr.addTest('ipad', function () {
+      return !!navigator.userAgent.match(/iPad/i);
+    });
+    Modernizr.addTest('iphone', function () {
+      return !!navigator.userAgent.match(/iPhone/i);
+    });
+    Modernizr.addTest('ipod', function () {
+      return !!navigator.userAgent.match(/iPod/i);
+    });
+    Modernizr.addTest('appleios', function () {
+      return (Modernizr.ipad || Modernizr.ipod || Modernizr.iphone);
+    });
+  </script>
+
   <script src="lib/jquery-1.7.1.min.js"></script>
   <script src="lib/json2.js"></script>
   <script src="lib/underscore-1.3.3.js"></script>
@@ -88,16 +104,18 @@
             </div>
 
             <ul id="search-results" class="orders">
-              <li class="order group"><a data-route="order">
-                <p class="code"></p>
-                <h2></h2>
-                <p class="others">With <span class="count">3 others</span>:</p>
-                <ul class="others">
-                  <li>Some Guy</li>
-                  <li>Some Other Guy</li>
-                  <li>Him Too</li>
-                </ul>
-              </a></li>
+              <% _.each(collection, function(order){ %>
+                <li class="order group" data-id="<%= order.id %>">
+                  <p class="code"><%= order.code %></p>
+                  <h2><%= order.full_name %></h2>
+                  <p class="others">With <%= order.tickets.length %> tickets:</p>
+                  <ul class="others">
+                    <% _.each(order.tickets, function(ticket){ %>
+                      <li><%= ticket.full_name %></li>
+                    <% }) %>
+                  </ul>
+                </li>
+              <% }) %>
             </ul>
           </script>
 
@@ -117,13 +135,14 @@
 
           <div id="order"></div>
           <script type="text/template" id="order-template">
-            <a class="back" href="#">&larr; Back</a>
+            <a class="back">&larr; Back</a>
 
             <div class="together single-ticket">
-              <h2>Rob Howard</h2>
+              <h2><%= full_name %></h2>
               <div class="action">
                 <a class="btn btn-green btn-large">Everybody</a>
               </div>
+              <!--
               <div class="single-details">
                 <p>Male, 26</p><a href="#">More Details</a>
                 <ul class="fold">
@@ -131,6 +150,7 @@
                   <li><strong>Address:</strong> Foo St, Barville NSW 2000</li>
                 </ul>
               </div>
+              -->
               <div class="group-details">
                 <p>Order with <span class="ticket-count">5</span> people:</p>
                 <ul> <!-- TODO: Float -->
@@ -147,7 +167,14 @@
               <p class="or-divider"><span>OR</span></p>
 
               <ul class="orders">
-                <li></li>
+                <% _.each(tickets, function(ticket){ %>
+                  <li>
+                    <h3><%= ticket.full_name %></h3>
+                    <div class="action">
+                      <a class="btn btn-blue btn-large">This One</a>
+                    </div>
+                  </li>
+                <% }) %>
               </ul>
             </div>
 

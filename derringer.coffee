@@ -12,7 +12,7 @@
     routes: {
       '': 'index'
       'search/': 'index'
-      'search/:terms': 'search'
+      'search/*terms': 'search'
       'orders/:id': 'order'
     }
 
@@ -25,34 +25,39 @@
       this.orderSearchView.terms = "" 
       this.orderSearchView.render()
 
-      $('#result-panel').addClass('right')
+      $('#order-panel').addClass('right')
       $('#search-panel').removeClass('left').removeClass('show-results')
       $('#terms').focus()
 
 
     search: (terms) ->
-      this.orderSearchView.terms = terms
-      this.orderSearchView.collection.forTerms(terms)
-      this.orderSearchView.render()
+      this.orderSearchView.terms = unescape(terms)
+      #this.orderSearchView.collection.forTerms(terms)
 
-      $('#result-panel').addClass('right')
+      $('#order-panel').addClass('right')
       $('#search-panel').removeClass('left').addClass('show-results')
+      $('#search-results').addClass('loading');
 
-      $results = $('#search-results')
-      $results.addClass('loading');
-      window.setTimeout(->
-        $results.removeClass('loading').addClass('done');
-      , 1500)
-
-      $('#terms').focus()
+      window.orders.fetch({
+        url: '/orders.json',
+        success: (collection, response) =>
+          this.orderSearchView.collection = window.orders
+          this.orderSearchView.render()
+          $('#search-results').removeClass('loading').addClass('done');
+          $('#terms').focus()
+      })# Swap this with the terms search URL when CouchDB is in.
 
 
     order: (id) ->
       $('#search-panel').addClass('left')
-      $('#result-panel').removeClass('right')
-      item = Orders.get(id)
-      view = new OrderView(model: item)
-
+      $('#order-panel').removeClass('right')
+      window.orders.fetch({
+        url: '/orders.json',
+        success: (collection, response) =>
+          order = window.orders.get(id)
+          view = new OrderView(model: order)
+          view.render()
+      })
 
   ##### Models #####
 
@@ -122,6 +127,11 @@
     }
 
     back: (event) ->
+      if window.history.length > 0
+        window.history.back()
+      else
+        window.App.navigate('/', true)
+
     confirm: (event) ->
 
 
@@ -147,10 +157,11 @@
     search: (event) ->
       event.preventDefault()
       $input = $(event.target).find('#terms')
-      newUrl = '/search/' + escape($input.val())
-      window.App.navigate newUrl, true
+      window.App.navigate "/search/#{escape($input.val())}", true
 
     select: (event) ->
+      id = $(event.target).closest('.order').attr('data-id')
+      window.App.navigate "/orders/#{escape(id)}", true
 
 
   class ScanView extends Backbone.View
