@@ -2309,33 +2309,37 @@ body { padding-bottom: 20px; }
 /* line 136, ../scss/styles.scss */
 .message { padding-left: 30px; /* TODO: background sprite */ }
 
-/****** Animation *****/
+/***** Animation *****/
 /* line 143, ../scss/styles.scss */
 #search-panel { /* Show Instructions, Hide Results */ /* Hide Instructions, Show Results */ }
 /* line 148, ../scss/styles.scss */
 #search-panel #search-results { height: 0; }
 
-/* line 165, ../scss/styles.scss */
+/***** Order View *****/
+/* line 167, ../scss/styles.scss */
+#order .back { cursor: pointer; }
+
+/* line 178, ../scss/styles.scss */
 hr { margin-top: 180px; display: block; }
 
-/* line 170, ../scss/styles.scss */
+/* line 183, ../scss/styles.scss */
 .panels-container { position: absolute; overflow: hidden; width: 100%; height: 92%; padding-top: 60px; }
 
-/* line 177, ../scss/styles.scss */
+/* line 190, ../scss/styles.scss */
 html.appleios .panels-container { padding-top: 30px; }
 
-/* line 179, ../scss/styles.scss */
+/* line 192, ../scss/styles.scss */
 .panel-outer { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; background: #ff8888; left: -50%; }
 
-/* line 187, ../scss/styles.scss */
+/* line 200, ../scss/styles.scss */
 .panel-inner { -webkit-transition-property: left; -moz-transition-property: left; -ms-transition-property: left; -o-transition-property: left; transition-property: left; -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -ms-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; position: absolute; width: 100%; left: 50%; }
 
-/* line 196, ../scss/styles.scss */
+/* line 209, ../scss/styles.scss */
 #search-panel.left { left: -100%; }
-/* line 198, ../scss/styles.scss */
+/* line 211, ../scss/styles.scss */
 #search-panel.left .panel-inner { left: 0%; }
 
-/* line 205, ../scss/styles.scss */
+/* line 218, ../scss/styles.scss */
 #order-panel.right { left: 0%; }
-/* line 207, ../scss/styles.scss */
+/* line 220, ../scss/styles.scss */
 #order-panel.right .panel-inner { left: 100%; }
