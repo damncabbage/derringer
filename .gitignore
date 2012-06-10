@@ -1,6 +1,6 @@
 # CouchDB
 tmp
-couchdb
+couchdb/*
 
 # Numerous always-ignore extensions
 *.diff

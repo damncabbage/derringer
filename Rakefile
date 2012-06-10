@@ -36,7 +36,7 @@ end
 namespace :watch do
   desc "Runs the Coffee-Script compiler in watch mode."
   task :coffee do
-    puts `coffee --watch --compile --output build/ *.coffee`
+    puts `coffee --watch --compile --output public/build/ public/*.coffee`
   end
 
   desc "Runs the Sass/Compass compiler in watch mode."

@@ -4,9 +4,7 @@
   "description": "Booth calls the shots, Derringer does the deed.",
   "version": "0.1.0",
   "main": "js/derringer.js",
-  "dependencies": {
-    "batman": "~>0.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "coffee-script": "~>1.3.1"
   },
