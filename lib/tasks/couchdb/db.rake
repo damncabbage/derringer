@@ -4,7 +4,7 @@ require 'json'
 require 'socket'
 
 namespace :couchdb do
-  namespace :init do
+  namespace :db do
 
     def port
       5984
@@ -14,6 +14,10 @@ namespace :couchdb do
     end
     def remote_server(host, username=nil, password=nil)
       Couch::Server.new(host, port, username, password)
+    end
+    def my_first_non_loopback_ipv4
+      addr = Socket.ip_address_list.detect{|intf| intf.ipv4? and !intf.ipv4_loopback? and !intf.ipv4_multicast?}
+      addr.ip_address if addr
     end
 
 
@@ -28,7 +32,7 @@ namespace :couchdb do
     end
 
     desc "Creates the databases."
-    task :db, :username, :password do |t, args|
+    task :create, :username, :password do |t, args|
       raise "Must provide username and password as arguments, eg. rake couchdb:init:admin[foobar,passworbaz]" unless args[:username] && args[:password]
 
       errors = []
