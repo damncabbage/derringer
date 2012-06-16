@@ -1,6 +1,10 @@
 # CouchDB
-tmp
 couchdb/*
+tmp/**/*
+bin/*
+vendor/gems/*
+!vendor/gems/cache/
+log/**/*
 
 # Numerous always-ignore extensions
 *.diff
