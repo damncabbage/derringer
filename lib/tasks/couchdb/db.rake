@@ -27,7 +27,7 @@ namespace :couchdb do
 
       response = local_server.put("/_config/admins/#{args[:username]}", args[:password].inspect)
       if response.code.to_i == 200
-        puts "Added user #{args[:username]}"
+        puts "Added user #{args[:username]}."
       end
     end
 
@@ -36,15 +36,19 @@ namespace :couchdb do
       raise "Must provide username and password as arguments, eg. rake couchdb:init:admin[foobar,passworbaz]" unless args[:username] && args[:password]
 
       errors = []
-      %w(orders scans).each do |db|
+      envs = ["development", "test", ""]
+      %w(scans).each do |db|
         begin
-          response = local_server(args[:username], args[:password]).put("/#{db}", "")
-          puts "Added database #{db}"
+          envs.each do |env|
+            db_name = [db, env].compact.join("_") # scans_development
+            response = local_server(args[:username], args[:password]).put("/#{db_name}", "")
+            puts "Added database #{db_name}."
+          end
         rescue Exception => e
           errors.push e
         end
       end
-      raise errors.map(&:message).join("\n")
+      raise errors.map(&:message).join("\n") unless errors.empty?
     end
 
 

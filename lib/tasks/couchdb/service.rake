@@ -1,3 +1,6 @@
+require File.expand_path('../../rake_helpers/os', File.dirname(__FILE__))
+include RakeHelpers::OS
+
 # CouchDB
 namespace :couchdb do
 

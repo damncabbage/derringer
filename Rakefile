@@ -12,14 +12,6 @@ rescue Exception => e
 end
 require 'rake'
 
-# Helpers
-def linux?
-  @linux ||= (`uname -a | grep -ic linux`.to_i > 0)
-end
-def mac?
-  @mac ||= !linux? && (`uname -a | grep -ic darwin`.to_i > 0)
-end
-
 # Libraries and Tasks
 Dir[File.dirname(__FILE__) + "/lib/**/*.rb"].each { |f| require f }
 Dir[File.dirname(__FILE__) + "/lib/tasks/**/*.rake"].each { |f| import f }
