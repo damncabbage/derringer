@@ -9,6 +9,7 @@ namespace :couchdb do
       end
     elsif mac?
       `launchctl start org.apache.couchdb`
+      puts "Started CouchDB." if $?.success?
     end
   end
 
@@ -18,6 +19,7 @@ namespace :couchdb do
       puts `couchdb/bin/couchdb -k`
     elsif mac?
       `launchctl stop org.apache.couchdb`
+      puts "Stopped CouchDB." if $?.success?
     end
   end
 
