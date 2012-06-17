@@ -1,0 +1,3 @@
+* Total Scanned vs Total Expected
+* Scans Running Total per 15 minutes (Line)
+* Scans per 15 minutes (Bar Graph)
