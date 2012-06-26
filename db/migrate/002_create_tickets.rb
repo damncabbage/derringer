@@ -1,12 +1,15 @@
 class CreateTickets < ActiveRecord::Migration
-  def self.up
-    create_table :tickets do |t|
-      
+  def change
+    create_table :tickets, :options => "ENGINE=MyISAM" do |t|
+      t.integer  "order_id"
+      t.integer  "ticket_type_id"
+      t.string   "code"
+      t.string   "full_name"
+      t.string   "age"
+      t.string   "gender"
+      t.string   "postcode"
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :tickets
+    execute "CREATE FULLTEXT INDEX fulltext_tickets ON tickets (full_name)"
   end
 end

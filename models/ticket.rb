@@ -1,4 +1,5 @@
 class Ticket < ActiveRecord::Base
+  belongs_to :order
 
   def scanned?
     scanned.length > 0
