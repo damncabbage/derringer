@@ -15,23 +15,30 @@
 #     :socket    => '/tmp/mysql.sock'
 #   }
 #
-ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'derringer_development.db')
 
+mysql_base = {
+  :adapter => 'mysql2',
+  :encoding  => 'utf8',
+  :reconnect => true,
+  :pool      => 5,
+  :username  => 'smashcon',
+  :host      => 'localhost'
 }
 
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'derringer_production.db')
+ActiveRecord::Base.configurations[:development] = mysql_base.merge({
+  :database => 'derringer_development',
+  :password  => 'smashcon',
+})
 
-}
+ActiveRecord::Base.configurations[:production] = mysql_base.merge({
+  :database => 'derringer',
+  :password  => ENV['MYSQL_PASSWORD'],
+})
 
-ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'derringer_test.db')
-
-}
+ActiveRecord::Base.configurations[:test] = mysql_base.merge({
+  :database => 'derringer_test',
+  :password  => 'smashcon',
+})
 
 # Setup our logger
 ActiveRecord::Base.logger = logger

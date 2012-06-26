@@ -1,5 +1,6 @@
 PADRINO_ENV = 'test' unless defined?(PADRINO_ENV)
 require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
+require 'database_cleaner'
 
 def app
   Derringer.tap { |app|  }
@@ -12,6 +13,17 @@ RSpec.configure do |config|
   config.before(:each) do
     CouchRest::Model::Base.database.recreate! rescue nil
     Thread.current[:couchrest_design_cache] = {}
+  end
+
+  # DB Cleaner
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+  config.before(:each) do 
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 end
 

@@ -14,7 +14,7 @@ gem 'haml'
 gem 'activerecord', :require => "active_record"
 gem 'couchrest'
 gem 'couchrest_model'
-gem 'sqlite3'
+gem 'mysql2'
 
 gem 'coffee-script'
 #gem 'uglifier', '~> 1.0'
@@ -23,10 +23,15 @@ gem 'bootstrap-sass'
 
 # Test requirements
 group :test do
-  gem 'rspec'
   gem 'rack-test', :require => "rack/test"
   gem 'factory_girl'
   gem 'ffaker'
+end
+
+group :test, :development do
+  gem 'rspec'
+  gem 'database_cleaner'
+  gem 'debugger'
 end
 
 # Padrino Stable Gem
