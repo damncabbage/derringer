@@ -7,6 +7,17 @@ The mobile companion to [Booth](https://github.com/smashcon/booth), SMASH!'s onl
 
 First really dumb requirement: make sure you have git (either `brew install git` or `sudo apt-get install git-core`).
 
+### Babushka
+
+This is the tool that you use to set up everything else (ruby, couchdb, mysql, databases, replication, etc).
+
+To install it, use:
+
+```
+sudo bash -c "`curl https://babushka.me/up`"
+```
+
+
 ### Ruby
 
 Install Ruby 1.9.2+ with either [rbenv](https://github.com/sstephenson/rbenv) or [RVM](http://rvm.io). Set up your gems with the following:
