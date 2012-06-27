@@ -13,18 +13,19 @@ module Import
       connection.transaction do
         connection.execute(orders_sql(year))
         connection.execute(tickets_sql)
-        connection.execute(ticket_tables_sql)
+        connection.execute(ticket_types_sql)
+        #connection.execute(update_counts_sql)
       end
     end
 
     def truncate!
-      %w(orders tickets ticket_types).each { |t| connection.execute("TRUNCATE `#{table}`") }
+      %w(orders tickets ticket_types).each { |table| connection.execute("TRUNCATE `#{table}`") }
     end
 
     protected
 
       def orders_sql(year)
-        ["
+        "
           INSERT INTO `orders` (
             `id`, `code`, `bpay_crn`, `status`,
             `email`, `full_name`, `phone`,
@@ -42,8 +43,8 @@ module Import
             `create_time`, `update_time`
           FROM `#{source_db}`.`chiki_order`
           WHERE
-            (create_time > ? AND create_time < ? )
-        ", "#{year}-01-01", "#{year}-12-31"]
+            (create_time > '#{year.to_i}-01-01' AND create_time < '#{year.to_i}-12-31')
+        "
       end
 
       def tickets_sql
@@ -78,6 +79,10 @@ module Import
               SELECT id FROM tickets
             )
         "
+      end
+
+      def update_counts_sql
+
       end
 
   end
