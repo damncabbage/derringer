@@ -1,0 +1,49 @@
+/ TODO: Turbo / Quick Scan
+/ The changing top-of-page instructions
+%header#instructions.masthead
+  %h1.touch Scan a barcode, or search for someone:
+/ Notification
+#search-notice
+%script#search-notice-template{:type => "text/template"}
+  <div class="message fold">
+  <h3>Done! you have <span class="scan-target">scanned Rob Howard.</span></h3>
+  /
+    <h3>Done! you have <span class="scan-target">scanned 4 people:</span></h3>
+    <ul>
+    <li>Rob Howard</li>
+    <li>Rob Howard</li>
+    <li>Rob Howard</li>
+    <li>Rob Howard</li>
+    </ul>
+  </div>
+/ The search form and results
+#search
+%script#search-template{:type => "text/template"}
+  <div id="search-form">
+  <div class="inputs">
+  <form id="searchForm" method="get">
+  <input id="terms" name="terms" type="text" class="text" placeholder="" />
+  <input id="submit" name="submit" type="submit" class="submit" value="Go" />
+  </form>
+  <div class="tip touch">Tap here to get started.</div>
+  <div class="tip mouse">Click here to get started.</div>
+  </div>
+  </div>
+  
+  <ul id="search-results" class="orders">
+  <% _.each(collection, function(order){ %>
+  <li class="order group" data-id="<%= order.id %>">
+  <p class="code"><%= order.code %></p>
+  <h2><%= order.full_name %></h2>
+  <p class="others">With <%= order.tickets.length %> tickets:</p>
+  <ul class="others">
+  <% _.each(order.tickets, function(ticket){ %>
+  <li><%= ticket.full_name %></li>
+  <% }) %>
+  </ul>
+  </li>
+  <% }) %>
+  </ul>
+%hr/
+%footer
+  %p &copy; SMASH! 2012

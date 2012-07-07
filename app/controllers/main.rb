@@ -1,12 +1,13 @@
 Derringer.controllers do
   # /
   get :index do
+    render 'main/search'
   end
 
   # /search?q=foo+bar
   get :search, :provides => [:json, :html] do
     case content_type
-      when :html then render :haml, "%h2 Oh Yeah #{params.inspect}"
+      when :html then render 'main/search'
       when :json then render :json => params
     end
   end
