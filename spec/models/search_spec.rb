@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Ticket and Order Search" do
 
-  let(:searcher) { Search.new(Order.connection) }
+  let(:agent) { Search::Base.new }
 
   let!(:found) do
     FactoryGirl.create(:order, {
@@ -15,7 +15,7 @@ describe "Ticket and Order Search" do
   end
 
   it "should find an order by its full name or email" do
-    results = searcher.find_orders("Find")
+    results = agent.search("Find")
     results.count.should == 1
     results.first.full_name.should == 'Find My Name'
   end
