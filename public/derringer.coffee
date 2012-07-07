@@ -12,7 +12,7 @@
     routes: {
       '': 'index'
       'search/': 'index'
-      'search/*terms': 'search'
+      'search/?q=:terms': 'search'
       'orders/:id': 'order'
     }
 
@@ -157,7 +157,7 @@
     search: (event) ->
       event.preventDefault()
       $input = $(event.target).find('#terms')
-      window.App.navigate "/search/#{escape($input.val())}", true
+      window.App.navigate "/search/?q=#{escape($input.val())}", true
 
     select: (event) ->
       id = $(event.target).closest('.order').attr('data-id')
@@ -187,7 +187,7 @@
   $(document).ready ->
     # Let's dance.
     window.App = new Derringer()
-    Backbone.history.start({ pushState: false });
+    Backbone.history.start({ pushState: true });
 
 )(jQuery)
 

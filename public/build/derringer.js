@@ -20,7 +20,7 @@
       Derringer.prototype.routes = {
         '': 'index',
         'search/': 'index',
-        'search/*terms': 'search',
+        'search/?q=:terms': 'search',
         'orders/:id': 'order'
       };
 
@@ -263,7 +263,7 @@
         var $input;
         event.preventDefault();
         $input = $(event.target).find('#terms');
-        return window.App.navigate("/search/" + (escape($input.val())), true);
+        return window.App.navigate("/search/?q=" + (escape($input.val())), true);
       };
 
       OrderSearchView.prototype.select = function(event) {
@@ -311,7 +311,7 @@
     return $(document).ready(function() {
       window.App = new Derringer();
       return Backbone.history.start({
-        pushState: false
+        pushState: true
       });
     });
   })(jQuery);
