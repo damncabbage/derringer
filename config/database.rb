@@ -71,19 +71,19 @@ ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Padrin
 db_config = case Padrino.env
             when :development
               {
-                :name => 'scans_development',
+                :suffix => 'development',
                 :username => 'smashcon',
                 :password => 'smashcon'
               }
             when :test
               {
-                :name => 'scans_test',
+                :suffix => 'test',
                 :username => 'smashcon',
                 :password => 'smashcon'
               }
             when :production
               {
-                :name => 'scans',
+                :suffix => nil,
                 :username => 'smashcon',
                 :password => ENV['COUCHDB_PASSWORD']
               }
@@ -91,14 +91,14 @@ db_config = case Padrino.env
 
 CouchRest::Model::Base.configure do |conf|
   conf.model_type_key = 'type' # compatibility with CouchModel 1.1
-  conf.database = CouchRest.database!(db_config[:name])
+  #conf.database = CouchRest.database!('scans')
   conf.environment = Padrino.env
   conf.connection = {
     :protocol => 'http',
     :host     => 'localhost',
     :port     => '5984',
     :prefix   => nil, #'padrino',
-    :suffix   => nil,
+    :suffix   => db_config[:suffix],
     :join     => '_',
     :username => db_config[:username],
     :password => db_config[:password]

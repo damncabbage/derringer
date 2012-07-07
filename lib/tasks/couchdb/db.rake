@@ -36,7 +36,7 @@ namespace :couchdb do
       raise "Must provide username and password as arguments, eg. rake couchdb:init:admin[foobar,passworbaz]" unless args[:username] && args[:password]
 
       errors = []
-      envs = ["development", "test", ""]
+      envs = ["development", "test", nil]
       %w(scans).each do |db|
         begin
           envs.each do |env|

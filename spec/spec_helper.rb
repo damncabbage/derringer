@@ -11,7 +11,7 @@ RSpec.configure do |config|
 
   # CouchDB Test DB Setup
   config.before(:each) do
-    CouchRest::Model::Base.database.recreate! rescue nil
+    Scan.database.recreate! rescue nil
     Thread.current[:couchrest_design_cache] = {}
   end
 

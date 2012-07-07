@@ -12,7 +12,6 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 gem 'compass'
 gem 'haml'
 gem 'activerecord', :require => "active_record"
-gem 'couchrest'
 gem 'couchrest_model'
 gem 'mysql2'
 
