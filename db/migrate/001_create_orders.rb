@@ -16,6 +16,6 @@ class CreateOrders < ActiveRecord::Migration
       t.datetime "received_ticket_at"
       t.timestamps
     end
-    execute "CREATE FULLTEXT INDEX fulltext_orders ON orders (full_name, email)"
+    execute "CREATE FULLTEXT INDEX fulltext_orders ON orders (code, full_name, email)"
   end
 end

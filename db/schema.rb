@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime "updated_at",         :null => false
   end
 
-  add_index "orders", ["full_name", "email"], :name => "fulltext_orders"
+  add_index "orders", ["code", "full_name", "email"], :name => "fulltext_orders"
 
   create_table "ticket_types", :force => true do |t|
     t.string   "title"
