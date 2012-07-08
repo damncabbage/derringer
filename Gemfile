@@ -31,6 +31,7 @@ group :test, :development do
   gem 'rspec'
   gem 'database_cleaner'
   gem 'debugger'
+  gem 'hpricot'
 end
 
 # Padrino Stable Gem
