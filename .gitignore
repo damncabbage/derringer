@@ -1,5 +1,7 @@
 # CouchDB
 couchdb/*
+couchdb.stdout
+couchdb.stderr
 tmp/**/*
 bin/*
 vendor/gems/*
