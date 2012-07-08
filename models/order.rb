@@ -1,6 +1,11 @@
 class Order < ActiveRecord::Base
   has_many :tickets
 
+  default_scope where("orders.created_at > '#{Time.now.year}-01-01'") # That sum hack.
+
+  scope :paid, where(:status => "resolved")
+  scope :unpaid, where(:status => "payment_pending")
+
   class << self
 
     def code?(code)

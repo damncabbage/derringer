@@ -10,14 +10,27 @@ module Search
 
       #def retrieve_orders_by_text
       def find_by_text(text)
-        find_orders(text)
+        orders = find_orders(text)
+        return orders
+        # TODO
+        tickets = find_tickets(text)
+        orders.zip(tickets.map(&:order)).flatten.compact
       end
 
       def find_orders(text)
         # http://stackoverflow.com/questions/1241602/mysql-match-across-multiple-tables
-        orders = Order.where("MATCH(code, full_name, email) AGAINST (? IN NATURAL LANGUAGE MODE)", text)
-        tickets = Ticket.where("MATCH(full_name) AGAINST (? IN NATURAL LANGUAGE MODE)", text)
-        orders.zip(tickets).flatten.compact
+        orders = Order.includes(:tickets).paid.where("
+          MATCH(orders.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
+          OR orders.code = ?
+          OR orders.email LIKE ?
+          OR orders.bpay_crn = ?
+        ", text, text, "#{text}%", text)
+      end
+
+      def find_tickets(text)
+        tickets = Ticket.paid.where("
+          MATCH(tickets.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
+        ", text)
       end
 
     end

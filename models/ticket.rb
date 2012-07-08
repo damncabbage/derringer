@@ -1,6 +1,11 @@
 class Ticket < ActiveRecord::Base
   belongs_to :order
 
+  default_scope where("tickets.created_at > '#{Time.now.year}-01-01'") # That sum hack.
+
+  scope :paid, joins(:order).where(:orders => {:status => "resolved"})
+  scope :unpaid, joins(:order).where(:orders => {:status => "payment_pending"})
+
   def scanned?
     scanned.length > 0
   end
