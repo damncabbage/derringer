@@ -74,28 +74,19 @@ body {
     position: absolute;
     top: image-height('tap-here.png') - 20px;
     right: 0px;
+    display: none;
   }
   .tip.mouse {
-    display: none;
+    @include replace-text-with-dimensions('click-here.png');
+    position: absolute;
+    top: image-height('click-here.png') - 20px;
+    right: 0px;
   }
 }
 
 /* Results list */
 #search-results {
   min-height: 200px;
-
-  &.loading {
-    background: image-url('loading.gif') no-repeat center 50px;
-  }
-  &.done {
-    & > li {
-      opacity: 1;
-    }
-  }
-  & > li {
-    opacity: 0;
-    @include transition(opacity 0.5s);
-  }
 }
 
 /* Orders list (usually also the results list) */
@@ -136,29 +127,6 @@ body {
 .message {
   padding-left: 30px;
   /* TODO: background sprite */
-}
-
-
-/***** Animation *****/
-#search-panel {
-  /* Show Instructions, Hide Results */
-  .tip, .message, .masthead {
-    @extend .animated-hide-open;
-  }
-  #search-results {
-    @extend .animated-hide-fold;
-    height: 0;
-  }
-
-  /* Hide Instructions, Show Results */
-  &.show-results {
-    .tip, .message, .masthead {
-      @extend .animated-hide-fold;
-    }
-    #search-results {
-      @extend .animated-hide-open;
-    }
-  }
 }
 
 
