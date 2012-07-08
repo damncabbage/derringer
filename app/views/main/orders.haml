@@ -1,0 +1,34 @@
+#order.order
+  = link_to "&laquo; Back".html_safe, url(:index), :class => "back"
+
+  .together
+    %h2= @order.code
+    %h3= "Ordered by #{@order.full_name}."
+    .action
+      %a.btn.btn-success.btn-large Everybody
+    .group-details
+      %p= "Order with #{@order.tickets.count} people:"
+      %ul
+        - @order.tickets.each do |ticket|
+          %li= ticket.full_name
+
+  .or-divider
+    %span OR
+
+  %ul.orders
+    - @order.tickets.each do |ticket|
+      %li
+        %h3= ticket.full_name
+        .action
+          %button.btn.btn-blue.btn-primary.btn-large{"data-toggle" => "button"} This One
+
+  .history
+    %h3 Order History
+    %ul
+      %li
+        %time 3 March 2012
+        paid for order by BPAY.
+      %li
+        %time 1 March 2012
+        created order.
+

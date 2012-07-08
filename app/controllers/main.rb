@@ -16,10 +16,15 @@ Derringer.controllers do
 
   # /orders/:id
   get :orders, :with => :id, :provides => [:json, :html] do
+    @order = Order.includes(:tickets).find(params[:id])
+    render 'main/orders'
   end
- 
+
   # /tickets/:id
   get :tickets, :with => :id, :provides => [:json, :html] do
+    @ticket = Ticket.includes(:order).find(params[:id])
+    @order = @ticket.includes(:tickets).order
+    render 'main/tickets'
   end
 
   # /scans/create
