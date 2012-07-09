@@ -17,6 +17,9 @@ Derringer.controllers do
   # /orders/:id
   get :orders, :with => :id, :provides => [:json, :html] do
     @order = Order.includes(:tickets).find(params[:id])
+    @all_scanned = @order.tickets.inject(false) do |b,t|
+      b = true if t.scanned?; b
+    end
     render 'main/orders'
   end
 

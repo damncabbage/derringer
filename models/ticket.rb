@@ -10,10 +10,19 @@ class Ticket < ActiveRecord::Base
     scanned.length > 0
   end
 
-  def scanned(code)
+  def scanned
     @scans ||= Scan.find_all_by_ticket_code(code)
   end
 
+  def scan!
+    Scan.create(
+      :order_id => order.id,
+      :ticket_id => id,
+      :order_code => order.code,
+      :ticket_code => code,
+      :booth => 'TODO'
+    )
+  end
 
   class << self
 

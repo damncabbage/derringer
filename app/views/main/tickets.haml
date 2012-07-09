@@ -4,6 +4,12 @@
   .together
     %h2= @ticket.name
     %h3= link_to @ticket.order.code, url(:orders, :id => @ticket.order.id)
+    - if @ticket.scanned?
+      .scanned
+        %p Warning! Ticket already scanned today:
+        %ul.scanned
+          - @ticket.scanned.each do |scan|
+            %li= "#{scan.created_at}, by #{scan.booth}"
     .action
       %a.btn.btn-green.btn-large 
     .group-details
