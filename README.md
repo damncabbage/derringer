@@ -53,6 +53,16 @@ If you're testing replication, use the following to set up replication to one or
 bundle exec rake couchdb:init:replication[exampleusername,apassword] hosts="192.168.2.1,192.168.2.2,..." # TODO
 ```
 
+### Get it Running
+
+```
+cd /path/to/derringer
+alias be="bundle exec"
+be rake couchdb:start
+be padrino s COUCHDB_PASSWORD="yourpasswordhere"
+# Now open http://localhost:3000/
+```
+
 
 ## Development
 
