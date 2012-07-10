@@ -15,7 +15,8 @@
           %p Warning! All tickets for this order have been scanned already.
 
       .action
-        = submit_tag "Everybody", :class => "btn btn-success btn-large"
+        = submit_tag "Everybody", :id => "order_confirm", :class => "btn btn-success btn-large"
+
       .group-details
         %p= "Order with #{@order.tickets.count} people:"
         %ul

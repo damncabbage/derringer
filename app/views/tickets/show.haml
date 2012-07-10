@@ -18,7 +18,7 @@
               %li= "#{scan.created_at}, by #{scan.booth}"
 
       .action
-        = submit_tag "Confirm this Ticket", :class => "btn btn-success btn-large"
+        = submit_tag "Confirm this Ticket", :id => "ticket_confirm", :class => "btn btn-success btn-large"
 
       .group-details
         %p= "Order with #{@order.tickets.count} people:"
