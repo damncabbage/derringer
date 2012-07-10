@@ -119,7 +119,7 @@ input[disabled] + label.btn {
 
 /* Results list */
 #search-results {
-  min-height: 200px;
+  min-height: 100px;
 }
 
 /* Orders list (usually also the results list) */
@@ -182,10 +182,10 @@ hr {
 }
 
 .panels-container {
-  position: absolute;
-  overflow: hidden;
-  width: 100%;
-  height: 92%;
+  //position: absolute;
+  //overflow: hidden;
+  //width: 100%;
+  //height: 92%;
   padding-top: 60px;
 }
 html.appleios .panels-container { padding-top: 30px; }
@@ -193,17 +193,16 @@ html.appleios .panels-container { padding-top: 30px; }
 .panel-outer {
   @include transition-property(left);
   @include transition-duration(0.5s);
-  position: absolute;
-  width: 100%;
-  background: #ff8888;
-  left: -50%;
+  //position: absolute;
+  //width: 100%;
+  //left: -50%;
 }
 .panel-inner {
   @include transition-property(left);
   @include transition-duration(0.5s);
-  position: absolute;
-  width: 100%;
-  left: 50%;
+  //position: absolute;
+  //width: 100%;
+  //left: 50%;
 }
 
 #search-panel {
