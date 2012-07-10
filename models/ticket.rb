@@ -20,7 +20,7 @@ class Ticket < ActiveRecord::Base
       :ticket_id => id,
       :order_code => order.code,
       :ticket_code => code,
-      :booth => 'TODO'
+      :booth => HostHelpers::id || "Unknown"
     )
   end
 
