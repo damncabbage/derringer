@@ -6,6 +6,14 @@ class Order < ActiveRecord::Base
   scope :paid, where(:status => "resolved")
   scope :unpaid, where(:status => "payment_pending")
 
+  def paid?
+    status == 'resolved'
+  end
+  def unpaid?
+    status == 'payment_pending'
+  end
+
+
   class << self
 
     def code?(code)

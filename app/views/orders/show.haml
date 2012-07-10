@@ -1,0 +1,56 @@
+#order.order
+  = link_to "&laquo; Back".html_safe, url(:index), :class => "back"
+
+  = form_tag url(:orders, :scan, :id => @order.id), :method => 'post' do |f|
+    .together
+      %h2= @order.code
+      %h3= "Ordered by #{@order.full_name}."
+
+      - unless @order.paid?
+        .unpaid
+          %p Warning! This order has not been paid for.
+
+      - if @all_scanned
+        .scanned
+          %p Warning! All tickets for this order have been scanned already.
+
+      .action
+        = submit_tag "Everybody", :class => "btn btn-success btn-large"
+      .group-details
+        %p= "Order with #{@order.tickets.count} people:"
+        %ul
+          - @order.tickets.each do |ticket|
+            %li= ticket.full_name
+
+
+  .or-divider
+    %span OR
+
+
+  = form_tag url(:orders, :scan_tickets, :id => @order.id), :method => 'post' do |f|
+    %ul.orders.btn-group
+      - @order.tickets.each do |ticket|
+        %li
+          %h3= ticket.full_name
+          - if ticket.scanned?
+            .scanned
+              %p Warning! Ticket already scanned today:
+              %ul.scanned
+                - ticket.scanned.each do |scan|
+                  %li= "#{scan.created_at}, by #{scan.booth}"
+          .action
+            = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}"
+            = label_tag "tickets_#{ticket.id}", :caption => "This One", :class => "btn btn-blue btn-primary btn-large"
+    .action
+      = submit_tag "Scan Selected Tickets", :class => "btn btn-success btn-large"
+
+  .history
+    %h3 Order History
+    %ul
+      %li
+        %time 3 March 2012
+        paid for order by BPAY.
+      %li
+        %time 1 March 2012
+        created order.
+

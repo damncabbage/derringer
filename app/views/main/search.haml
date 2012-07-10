@@ -17,8 +17,10 @@
     %ul.orders.done.show-results{:id => "search-results"}
       - @results.each do |order|
         %li.order.group
-          = link_to url(:orders, :id => order.id) do
+          = link_to url(:orders, :show, :id => order.id) do
             %p{:class => "code"}= order.code
+            - unless order.paid?
+              %p{:class => "unpaid"} Unpaid!
             %h2= order.full_name
             %p.others= "With #{order.tickets.count} tickets:"
             %ul.others

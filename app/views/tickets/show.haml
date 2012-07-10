@@ -1,0 +1,39 @@
+#ticket.order
+  %a.back{:href => "javascript:window.location.back();"} &laquo; Back
+
+  = form_tag url(:tickets, :scan, :id => @ticket.order.id), :method => 'post' do |f|
+    .together
+      %h2= @ticket.full_name
+      %h3= link_to @ticket.order.code, url(:orders, :show, :id => @ticket.order.id)
+
+      - unless @ticket.order.paid?
+        .unpaid
+          %p Warning! This order has not been paid for.
+
+      - if @ticket.scanned?
+        .scanned
+          %p Warning! Ticket already scanned today:
+          %ul.scanned
+            - @ticket.scanned.each do |scan|
+              %li= "#{scan.created_at}, by #{scan.booth}"
+
+      .action
+        = submit_tag "Confirm this Ticket", :class => "btn btn-success btn-large"
+
+      .group-details
+        %p= "Order with #{@order.tickets.count} people:"
+        %ul
+          - @order.tickets.each do |ticket|
+            %li= ticket.full_name
+
+
+  .history
+    %h3 Order History
+    %ul
+      %li
+        %time 3 March 2012
+        paid for order by BPAY.
+      %li
+        %time 1 March 2012
+        created order.
+
