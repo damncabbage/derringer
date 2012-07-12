@@ -65,7 +65,7 @@ namespace :couchdb do
 
       ip_list.each do |ip|
 
-        rs = remote_server(ip, args[:username], args[:password])
+        rs = local_server(args[:username], args[:password])
         response = rs.post("/_replicate", {
           :source => db,
           :target => URI::HTTP.build(
