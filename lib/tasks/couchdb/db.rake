@@ -67,16 +67,17 @@ namespace :couchdb do
 
         rs = remote_server(ip, args[:username], args[:password])
         response = rs.post("/_replicate", {
-          :source => "http://#{ip}:#{port}/#{db}",
+          :source => db,
           :target => URI::HTTP.build(
-            :host => '127.0.0.1', :port => port, :path => "/#{db}",
+            :host => ip, :port => port, :path => "/#{db}",
             :userinfo => "#{args[:username]}:#{args[:password]}"
-          ),
+          ).to_s,
           :continuous => true
         }.to_json)
 
-        if response.code.to_i == 200
-          puts "Replication from #{ip} established."
+        code = response.code.to_i
+        if code >= 200 && code <= 202
+          puts "Replication to #{ip} established."
         end
       end
     end
