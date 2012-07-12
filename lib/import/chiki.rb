@@ -76,7 +76,7 @@ module Import
           FROM `#{source_db}`.`chiki_ticket_type`
           WHERE
             id IN (
-              SELECT id FROM tickets
+              SELECT ticket_type_id FROM tickets
             )
         "
       end
