@@ -4,11 +4,12 @@ namespace :smashcon do
   namespace :db do
 
     desc "Grab a Chiki database dump from a remote server, and import it. Relies on the DB user having CREATE/DROP permissions for everything in the database indicated by the [tmp_db] argument."
-    task :grab_dump_from_source, [:tmp_db] => :environment do |t, args|
+    task :grab_dump_from_source, [:remote_user, :tmp_db] => :environment do |t, args|
+      remote_user = args[:remote_user] || `whoami`
       tmp_db   = args[:tmp_db] || 'chiki'
       tmp_file = "/tmp/chiki_latest.sql"
 
-      puts `scp smash.org.au:chiki_latest.sql #{tmp_file}`
+      puts `scp #{remote_user}@smash.org.au:chiki_latest.sql #{tmp_file}`
       raise "Could not retrieve dump from server." unless File.exist?(tmp_file)
 
       derringer_conf = Order.configurations[PADRINO_ENV.to_sym]
