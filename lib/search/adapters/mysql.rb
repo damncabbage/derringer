@@ -24,7 +24,9 @@ module Search
           OR orders.code = ?
           OR orders.email LIKE ?
           OR orders.bpay_crn = ?
-        ", text, text, "#{text}%", text)
+        ", text, text, "#{text}%", text).map do |order|
+          ::Search::Result.new(order.tickets)
+        end
       end
 
       def find_tickets(text)

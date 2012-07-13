@@ -1,5 +1,5 @@
 #order.order
-  = link_to "&laquo; Back".html_safe, url(:index), :class => "back"
+  = link_to "&laquo; Back to Search".html_safe, "javascript:window.history.back();", :class => "back"
 
   = form_tag url(:orders, :scan, :id => @order.id), :method => 'post' do |f|
     .together
@@ -21,7 +21,7 @@
         %p= "Order with #{@order.tickets.count} people:"
         %ul
           - @order.tickets.each do |ticket|
-            %li= ticket.full_name
+            %li= "#{ticket.full_name}, #{ticket.ticket_type.title}"
 
 
   .or-divider
@@ -40,7 +40,10 @@
                 - ticket.scanned.each do |scan|
                   %li= "#{scan.created_at}, by #{scan.booth}"
           .action
-            = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}"
+            - if @selected[ticket.id.to_s]
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1, :checked => "checked"
+            - else
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1
             = label_tag "tickets_#{ticket.id}", :caption => "This One", :class => "btn btn-blue btn-primary btn-large"
     .action
       = submit_tag "Scan Selected Tickets", :class => "btn btn-success btn-large"
@@ -49,9 +52,6 @@
     %h3 Order History
     %ul
       %li
-        %time 3 March 2012
-        paid for order by BPAY.
-      %li
-        %time 1 March 2012
+        %time= "#{@order.created_at.strftime("%-d %B, %Y")}"
         created order.
 

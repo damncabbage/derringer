@@ -8,16 +8,7 @@ module Search
     end
 
     def search(text)
-      stripped = text.strip
-      if Ticket.code?(stripped)
-        result = Result.new([Ticket.includes(:order).find_by_code(stripped)])
-        [result] if result
-      elsif Order.page_code?(stripped)
-        result = Result.new(Ticket.get_page(stripped))
-        [result] if result
-      else
-        adapter.find_by_text(stripped)
-      end
+      adapter.find_by_text(text)
     end
 
     protected

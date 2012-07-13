@@ -14,7 +14,7 @@ gem 'haml'
 gem 'activerecord', :require => "active_record"
 gem 'couchrest_model'
 gem 'mysql2'
-gem 'therubyracer'
+gem 'addressable'
 
 gem 'coffee-script'
 #gem 'uglifier', '~> 1.0'

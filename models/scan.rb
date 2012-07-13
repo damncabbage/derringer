@@ -20,6 +20,7 @@ class Scan < CouchRest::Model::Base
   design do
     view :by_ticket_code
     view :by_order_code
+    # TODO: Reporting
   end
 
   # Find helpers: find_by_ticket_code exists, but it only retrieves

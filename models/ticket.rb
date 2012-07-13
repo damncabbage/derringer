@@ -1,5 +1,6 @@
 class Ticket < ActiveRecord::Base
   belongs_to :order
+  belongs_to :ticket_type
 
   default_scope where("tickets.created_at > '#{Time.now.year}-01-01'") # That sum hack.
 
@@ -22,6 +23,8 @@ class Ticket < ActiveRecord::Base
       :ticket_code => code,
       :booth => HostHelpers::id || "Unknown"
     )
+    self.scanned = true
+    save!
   end
 
   class << self

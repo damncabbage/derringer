@@ -7,15 +7,28 @@ Derringer.controllers do
   # /search?q=foo+bar
   get :search, :provides => [:json, :html] do
     @q = params[:q].try(:strip)
-    @results = ::Search::Base.new.search(@q)
+    redirect url(:index) if @q.blank?
+
+    @results = []
 
     if Ticket.code?(@q)
-      # HACK: Should be handled by Search, not the controller.
       redirect url(:tickets, :show, :id => Ticket.find_by_code(@q))
-    elsif @results.count == 1
-      # One result? Go directly there. Covers lucky searches AND page scans.
-      # TODO: Way of communicating pre-selected tickets.
-      redirect url(:orders, :show, :id => @results.order.id)
+    elsif Order.page_code?(@q)
+      order = Order.order_from_page_code(@q)
+      if order
+        tickets = order.page(Order.page_number_for_code(@q))
+        selected_ticket_ids = tickets.inject({}) do |hash,ticket|
+          hash["tickets[#{ticket.id}]"] = 1
+          hash
+        end
+        redirect url(:orders, :show, {:id => order.id}.merge(selected_ticket_ids))
+      end
+    else
+      @results = ::Search::Base.new.search(@q)
+      if @results.count == 1
+        # One result? Go directly there. Covers lucky searches AND page scans.
+        redirect url(:orders, :show, :id => @results.first.order.id)
+      end
     end
 
     case content_type
@@ -23,5 +36,10 @@ Derringer.controllers do
       when :json then render :json => params
     end
   end
+
+  protected
+
+    def selected_ticket_ids(tickets)
+    end
 
 end

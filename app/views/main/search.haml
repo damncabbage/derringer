@@ -1,7 +1,8 @@
 / TODO: Turbo / Quick Scan
 / The changing top-of-page instructions
-%header#instructions.masthead
-  %h1.touch Scan a barcode, or search for someone:
+- unless @q
+  %header#instructions.masthead
+    %h1.touch Scan a barcode, or search for someone:
 
 / The search form and results
 #search
@@ -10,8 +11,9 @@
       = form_tag url(:search), :id => "searchForm", :method => "get" do
         = text_field_tag :q, :value => @q, :id => "terms", :class => "text", :placeholder => "Name, email address or order code.", :autocomplete => "off"
         = submit_tag "Go", :id => "submit", :name => "submit", :class => "submit"
-      .tip.touch Tap here to get started.
-      .tip.mouse Click here to get started.
+      - unless @q
+        .tip.touch Tap here to get started.
+        .tip.mouse Click here to get started.
 
   - if @results.present?
     %ul.orders.done.show-results{:id => "search-results"}
@@ -26,6 +28,8 @@
             %ul.others
               - order.tickets.each do |ticket|
                 %li= ticket.full_name
+  - elsif @q
+    %h3 Couldn't find anything!
 
 / Notification
 #search-notice
