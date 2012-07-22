@@ -19,12 +19,15 @@ module Search
 
       def find_orders(text)
         # http://stackoverflow.com/questions/1241602/mysql-match-across-multiple-tables
-        orders = Order.includes(:tickets).paid.where("
-          MATCH(orders.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
-          OR orders.code = ?
+        orders = Order.includes(:tickets).paid.limit(40).where("
+          orders.code = ?
           OR orders.email LIKE ?
           OR orders.bpay_crn = ?
-        ", text, text, "#{text}%", text).map do |order|
+          OR (
+            MATCH(orders.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
+          )
+          OR tickets.full_name LIKE ?
+        ", text, "#{text}%", text, text, "#{text}%").map do |order|
           ::Search::Result.new(order.tickets)
         end
       end

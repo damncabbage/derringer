@@ -2,7 +2,7 @@ Derringer.controller :orders do
 
   get :show, :map => '/orders/:id' do
     @order = Order.includes(:tickets).find(params[:id])
-    @all_scanned = !!@order.tickets.detect { |t| t.scanned? }
+    @some_scanned = !!@order.tickets.detect { |t| t.scanned? }
     @selected = params[:tickets] || {}
     render 'orders/show'
   end

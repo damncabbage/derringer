@@ -6,7 +6,7 @@ Derringer.controller :tickets do
     render 'tickets/show'
   end
 
-  post :scan, :map => '/orders/:id/scan' do
+  post :scan, :map => '/tickets/:id/scan' do
     @ticket = Ticket.find(params[:id])
     @ticket.scan!
     flash[:scanned] = [@ticket.full_name]

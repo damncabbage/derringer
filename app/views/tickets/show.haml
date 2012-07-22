@@ -1,8 +1,11 @@
 #ticket.order
-  %a.back{:href => "javascript:window.location.back();"} &laquo; Back
+  = link_to "&laquo; Back to Search".html_safe, "javascript:window.history.back();", :class => "back"
 
-  = form_tag url(:tickets, :scan, :id => @ticket.order.id), :method => 'post' do |f|
+  = form_tag url(:tickets, :scan, :id => @ticket.id), :method => 'post' do |f|
     .together
+      .action
+        = submit_tag "Confirm this Ticket", :id => "ticket_confirm", :class => "btn btn-success btn-large"
+
       %h2= @ticket.full_name
       %h3= link_to @ticket.order.code, url(:orders, :show, :id => @ticket.order.id)
 
@@ -17,11 +20,8 @@
             - @ticket.scanned.each do |scan|
               %li= "#{scan.created_at}, by #{scan.booth}"
 
-      .action
-        = submit_tag "Confirm this Ticket", :id => "ticket_confirm", :class => "btn btn-success btn-large"
-
       .group-details
-        %p= "Order with #{@order.tickets.count} people:"
+        %p= "From an order with #{@order.tickets.count} people:"
         %ul
           - @order.tickets.each do |ticket|
             %li= ticket.full_name
@@ -31,9 +31,6 @@
     %h3 Order History
     %ul
       %li
-        %time 3 March 2012
-        paid for order by BPAY.
-      %li
-        %time 1 March 2012
+        %time= "#{@order.created_at.strftime("%-d %B, %Y")}"
         created order.
 

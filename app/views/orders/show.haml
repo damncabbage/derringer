@@ -3,6 +3,9 @@
 
   = form_tag url(:orders, :scan, :id => @order.id), :method => 'post' do |f|
     .together
+      .action
+        = submit_tag "Everybody", :id => "order_confirm", :class => "btn btn-success btn-large", :tabindex => 1
+
       %h2= @order.code
       %h3= "Ordered by #{@order.full_name}."
 
@@ -10,12 +13,9 @@
         .unpaid
           %p Warning! This order has not been paid for.
 
-      - if @all_scanned
+      - if @some_scanned
         .scanned
-          %p Warning! All tickets for this order have been scanned already.
-
-      .action
-        = submit_tag "Everybody", :id => "order_confirm", :class => "btn btn-success btn-large"
+          %p Warning! Some of these tickets have already been scanned.
 
       .group-details
         %p= "Order with #{@order.tickets.count} people:"
@@ -32,6 +32,12 @@
     %ul.orders.btn-group
       - @order.tickets.each do |ticket|
         %li
+          .action
+            - if @selected[ticket.id.to_s]
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1, :checked => "checked"
+            - else
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1
+            = label_tag "tickets_#{ticket.id}", :caption => "This One", :class => "btn btn-blue btn-primary btn-large"
           %h3= ticket.full_name
           - if ticket.scanned?
             .scanned
@@ -39,12 +45,6 @@
               %ul.scanned
                 - ticket.scanned.each do |scan|
                   %li= "#{scan.created_at}, by #{scan.booth}"
-          .action
-            - if @selected[ticket.id.to_s]
-              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1, :checked => "checked"
-            - else
-              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1
-            = label_tag "tickets_#{ticket.id}", :caption => "This One", :class => "btn btn-blue btn-primary btn-large"
     .action
       = submit_tag "Scan Selected Tickets", :class => "btn btn-success btn-large"
 

@@ -17,10 +17,14 @@ Derringer.controllers do
       order = Order.order_from_page_code(@q)
       if order
         tickets = order.page(Order.page_number_for_code(@q))
-        selected_ticket_ids = tickets.inject({}) do |hash,ticket|
-          hash["tickets[#{ticket.id}]"] = 1
-          hash
-        end
+	selected_ticket_ids = if tickets
+                                tickets.inject({}) do |hash,ticket|
+                                  hash["tickets[#{ticket.id}]"] = 1
+                                  hash
+                                end
+                              else
+                                {}
+                              end
         redirect url(:orders, :show, {:id => order.id}.merge(selected_ticket_ids))
       end
     else

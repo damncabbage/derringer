@@ -17,19 +17,25 @@
 
   - if @results.present?
     %ul.orders.done.show-results{:id => "search-results"}
-      - @results.each do |order|
+      - @results.each do |result|
         %li.order.group
-          = link_to url(:orders, :show, :id => order.id) do
-            %p{:class => "code"}= order.code
-            - unless order.paid?
+          = link_to url(:orders, :show, :id => result.order.id) do
+            %p{:class => "code"}= result.order.code
+            - unless result.order.paid?
               %p{:class => "unpaid"} Unpaid!
-            %h2= order.full_name
-            %p.others= "With #{order.tickets.count} tickets:"
+            %h2= result.order.full_name
+            %p.others= "With #{result.order.tickets.count} tickets:"
             %ul.others
-              - order.tickets.each do |ticket|
+              - result.order.tickets.each do |ticket|
                 %li= ticket.full_name
   - elsif @q
     %h3 Couldn't find anything!
+
+  - if flash[:scanned]
+    %h3 Success! Scanned:
+    %ul
+      - flash[:scanned].each do |name|
+        %li=name
 
 / Notification
 #search-notice
