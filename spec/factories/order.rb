@@ -17,6 +17,20 @@ FactoryGirl.define do
     tickets_count 0 # TODO
   end
 
+  factory :order_with_ticket, :parent => :order do
+    after_build do |order|
+      order.tickets << FactoryGirl.build(:ticket, :order => order)
+    end
+  end
+
+  factory :order_with_tickets, :parent => :order do
+    after_build do |order| 
+      3.times do
+        order.tickets << FactoryGirl.build(:ticket, :order => order)
+      end
+    end
+  end
+
   factory :ticket do
     association :order
     code { "#{order_code}-#{"%04d" % rand(9999)}" }
