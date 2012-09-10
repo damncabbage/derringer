@@ -9,10 +9,12 @@ ActiveRecord::Base.mass_assignment_sanitizer = :strict
 ActiveRecord::Base.auto_explain_threshold_in_seconds = 0.5
 ActiveRecord::Base.include_root_in_json = false
 ActiveRecord::Base.store_full_sti_class = true
+ActiveRecord::Base.schema_format = :sql # Dump to .sql for search index support
 ActiveSupport.use_standard_json_time_format = true
 ActiveSupport.escape_html_entities_in_json = false
 
 ar_config = YAML.load_file(Padrino.root('config','database.yml')).with_indifferent_access
+ActiveRecord::Base.configurations = ar_config
 ActiveRecord::Base.establish_connection(ar_config[Padrino.env])
 
 
