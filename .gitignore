@@ -1,7 +1,12 @@
+# Config
+config/database.yml
+config/couch.yml
+
 # CouchDB
 couchdb/*
 couchdb.stdout
 couchdb.stderr
+
 tmp/**/*
 bin/*
 vendor/gems/*

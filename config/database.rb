@@ -1,106 +1,25 @@
-##### ActiveRecord #####
+# We're going a little off the Padrino beaten path here; we
+# have two different types of models, and Padrino doesn't
+# seem to like using .yml configs by default; pull them
+# in manually instead.
 
-##
-# You can use other adapters like:
-#
-#   ActiveRecord::Base.configurations[:development] = {
-#     :adapter   => 'mysql',
-#     :encoding  => 'utf8',
-#     :reconnect => true,
-#     :database  => 'your_database',
-#     :pool      => 5,
-#     :username  => 'root',
-#     :password  => '',
-#     :host      => 'localhost',
-#     :socket    => '/tmp/mysql.sock'
-#   }
-#
-
-mysql_base = {
-  :adapter => 'mysql2',
-  :encoding  => 'utf8',
-  :reconnect => true,
-  :pool      => 5,
-  :username  => 'smashcon',
-  :host      => 'localhost'
-}
-
-ActiveRecord::Base.configurations[:development] = mysql_base.merge({
-  :database => 'derringer_development',
-  :password  => 'smashcon',
-})
-
-ActiveRecord::Base.configurations[:production] = mysql_base.merge({
-  :database => 'derringer',
-  :password  => ENV['MYSQL_PASSWORD'],
-})
-
-ActiveRecord::Base.configurations[:test] = mysql_base.merge({
-  :database => 'derringer_test',
-  :password  => 'smashcon',
-})
-
-# Setup our logger
+# ActiveRecord
 ActiveRecord::Base.logger = logger
-
-# Raise exception on mass assignment protection for Active Record models
 ActiveRecord::Base.mass_assignment_sanitizer = :strict
-
-# Log the query plan for queries taking more than this (works
-# with SQLite, MySQL, and PostgreSQL)
 ActiveRecord::Base.auto_explain_threshold_in_seconds = 0.5
-
-# Include Active Record class name as root for JSON serialized output.
 ActiveRecord::Base.include_root_in_json = false
-
-# Store the full class name (including module namespace) in STI type column.
 ActiveRecord::Base.store_full_sti_class = true
-
-# Use ISO 8601 format for JSON serialized times and dates.
 ActiveSupport.use_standard_json_time_format = true
-
-# Don't escape HTML entities in JSON, leave that for the #json_escape helper.
-# if you're including raw json in an HTML page.
 ActiveSupport.escape_html_entities_in_json = false
 
-# Now we can estabilish connection with our db
-ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Padrino.env])
+ar_config = YAML.load_file(Padrino.root('config','database.yml')).with_indifferent_access
+ActiveRecord::Base.establish_connection(ar_config[Padrino.env])
 
 
-##### CouchREST #####
-db_config = case Padrino.env
-            when :development
-              {
-                :suffix => 'development',
-                :username => 'smashcon',
-                :password => 'smashcon'
-              }
-            when :test
-              {
-                :suffix => 'test',
-                :username => 'smashcon',
-                :password => 'smashcon'
-              }
-            when :production
-              {
-                :suffix => nil,
-                :username => 'smashcon',
-                :password => ENV['COUCHDB_PASSWORD']
-              }
-            end
-
+# CouchREST
+couch_config = YAML.load_file(Padrino.root('config','couch.yml')).with_indifferent_access
 CouchRest::Model::Base.configure do |conf|
   conf.model_type_key = 'type' # compatibility with CouchModel 1.1
-  #conf.database = CouchRest.database!('scans')
   conf.environment = Padrino.env
-  conf.connection = {
-    :protocol => 'http',
-    :host     => 'localhost',
-    :port     => '5984',
-    :prefix   => nil, #'padrino',
-    :suffix   => db_config[:suffix],
-    :join     => '_',
-    :username => db_config[:username],
-    :password => db_config[:password]
-  }
+  conf.connection = couch_config[Padrino.env]
 end
