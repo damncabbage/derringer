@@ -8,9 +8,6 @@ couchdb.stdout
 couchdb.stderr
 
 tmp/**/*
-bin/*
-vendor/gems/*
-!vendor/gems/cache/
 log/**/*
 
 # Numerous always-ignore extensions
@@ -44,4 +41,5 @@ nbproject
 .idea
 .bundle
 vendor/bundler
+vendor/bundle
 node_modules
