@@ -2,12 +2,12 @@ FactoryGirl.define do
 
   factory :order do
     code do
-      chars = (0..9).to_a + ('A'..'Z').to_a
-      code  = (0..9).map { chars[rand(chars.length)] }.join
+      chars = '0123456789ACEFGHJKLMNPQRSTWXY'.split('')
+      code  = (0..6).map { chars[rand(chars.length)] }.join
       "S-#{code}"
     end
     bpay_crn { rand(89999) + 10000 }
-    status "paid"
+    status "resolved"
     full_name { Faker::Name.name }
     phone { Faker::PhoneNumberAU.phone_number }
     state { Faker::AddressAU.state_abbr }
@@ -29,14 +29,6 @@ FactoryGirl.define do
         order.tickets << FactoryGirl.build(:ticket, :order => order)
       end
     end
-  end
-
-  factory :ticket do
-    association :order
-    code { "#{order.code}-#{"%04d" % rand(9999)}" }
-    full_name { Faker::Name.name }
-    gender { ["Male","Female",""].sample }
-    postcode { Faker::AddressAU.zip_code }
   end
 
 end
