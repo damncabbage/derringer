@@ -7,6 +7,10 @@ couchdb/*
 couchdb.stdout
 couchdb.stderr
 
+# DB Schema; we can't use this because of MySQL full-text indices, and
+# Padrino doesn't let us dump out a db/schema.sql
+db/schema.rb
+
 tmp/**/*
 log/**/*
 
