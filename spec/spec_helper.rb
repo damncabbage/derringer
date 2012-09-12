@@ -1,9 +1,10 @@
 PADRINO_ENV = 'test' unless defined?(PADRINO_ENV)
 require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 require 'database_cleaner'
+require 'capybara/rspec'
 
 def app
-  Derringer.tap { |app|  }
+  Derringer.tap {|app| }
 end
 
 RSpec.configure do |config|
@@ -19,16 +20,18 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
-  config.before(:each) do 
+  config.before(:each) do
     DatabaseCleaner.start
   end
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # Requests
+  Capybara.app = app
 end
 
 # FactoryGirl models
-#Dir[File.dirname(__FILE__) + '/factories/**/*.rb'].each { |f| require f }
 FactoryGirl.definition_file_paths = [
   File.join(Padrino.root, 'factories'),
   File.join(Padrino.root, 'test', 'factories'),

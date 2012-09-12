@@ -26,6 +26,7 @@ group :test do
   gem 'rack-test', :require => "rack/test"
   gem 'factory_girl'
   gem 'ffaker'
+  gem 'capybara'
 end
 
 group :test, :development do
@@ -36,7 +37,7 @@ group :test, :development do
 end
 
 # Padrino Stable Gem
-gem 'padrino', '0.10.6'
+gem 'padrino', '0.10.7'
 
 # Or Padrino Edge
 # gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
