@@ -7,6 +7,10 @@ def app
   Derringer.tap {|app| }
 end
 
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[File.join(Padrino.root, 'spec/support/**/*.rb')].each {|f| require f}
+
 RSpec.configure do |config|
   config.include Rack::Test::Methods
 
