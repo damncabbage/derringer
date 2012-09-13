@@ -23,11 +23,11 @@ class Order < ActiveRecord::Base
   class << self
 
     def code?(code)
-      code.match /\A#{Barcode::ORDER_REGEX_PARTS}\z/
+      code.match /\A#{Barcode::ORDER_REGEX_PARTS}\Z/
     end
 
     def page_code?(code)
-      code.match /\A#{Barcode::PAGE_REGEX_PARTS}\z/
+      code.match /\A#{Barcode::PAGE_REGEX_PARTS}\Z/
     end
 
     def order_from_page_code(code)
@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
 
     def page_number_for_code(code)
       return nil unless page_code?(code)
-      code.match(/\A#{Barcode::PAGE_REGEX_PARTS}\z/)[1].try(:to_i)
+      code.match(/\A#{Barcode::PAGE_REGEX_PARTS}\Z/)[1].try(:to_i)
     end
 
     def page_for_code(code)
