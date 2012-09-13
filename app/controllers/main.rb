@@ -5,7 +5,7 @@ Derringer.controllers do
   end
 
   # /search?q=foo+bar
-  get :search, :provides => [:json, :html] do
+  get :search do
     @q = params[:q].try(:strip)
     redirect url(:index) if @q.blank?
 
