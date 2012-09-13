@@ -12,12 +12,16 @@ Derringer.controllers do
     @results = []
 
     if Ticket.code?(@q)
+      # Direct ticket lookup
       redirect url(:tickets, :show, :id => Ticket.find_by_code(@q))
+
     elsif Order.page_code?(@q)
+      # Scanning a shortcut-code to pre-select a page full of tickets
       order = Order.order_from_page_code(@q)
       if order
+        # HACK: Nasty way of pre-selecting a group of individual tickets belonging to an order.
         tickets = order.page(Order.page_number_for_code(@q))
-	selected_ticket_ids = if tickets
+        selected_ticket_ids = if tickets
                                 tickets.inject({}) do |hash,ticket|
                                   hash["tickets[#{ticket.id}]"] = 1
                                   hash
@@ -27,18 +31,16 @@ Derringer.controllers do
                               end
         redirect url(:orders, :show, {:id => order.id}.merge(selected_ticket_ids))
       end
+
     else
       @results = ::Search::Base.new.search(@q)
+      # One result? Go directly there. Covers lucky searches AND page scans.
       if @results.count == 1
-        # One result? Go directly there. Covers lucky searches AND page scans.
         redirect url(:orders, :show, :id => @results.first.order.id)
       end
     end
 
-    case content_type
-      when :html then render 'main/search'
-      when :json then render :json => params
-    end
+    render 'main/search'
   end
 
   protected

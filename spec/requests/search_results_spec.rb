@@ -15,21 +15,21 @@ describe 'Search Result Details', :type => :request do
     FactoryGirl.create(:order_with_ticket)
   end
 
-  context "when searching for an order under a common name" do
-    let!(:order) do
-      FactoryGirl.create(:order_with_tickets,
-                         :full_name => 'Henry Wang')
-    end
-    let!(:other_order) do
-      FactoryGirl.create(:order_with_tickets,
-                         :full_name => "Vera Wang")
-    end
-    let!(:unpaid_order) do
-      FactoryGirl.create(:order_with_tickets,
-                         :full_name => 'Yi Wang',
-                         :status => "payment_pending")
-    end
+  let!(:order) do
+    FactoryGirl.create(:order_with_tickets,
+                       :full_name => 'Specialsnowflake Wang')
+  end
+  let!(:other_order) do
+    FactoryGirl.create(:order_with_tickets,
+                       :full_name => "Vera Wang")
+  end
+  let!(:unpaid_order) do
+    FactoryGirl.create(:order_with_tickets,
+                       :full_name => 'Yi Wang',
+                       :status => "payment_pending")
+  end
 
+  context "when searching for an order under a common name" do
     # 2012 had 27 tickets with the last name "Wang". Consider this
     # a real-world case. :)
     before do
@@ -64,6 +64,15 @@ describe 'Search Result Details', :type => :request do
     end
   end
 
+  context "when searching for an order with a unique name" do
+    before do
+      visit '/'
+      search_for 'Specialsnowflake'
+    end
+    it "should take the user directly to the order page" do
+      current_path.should == "/orders/#{order.id}"
+    end
+  end
 
   context "when searching for a nonexistent ticket or order" do
     before do

@@ -11,6 +11,8 @@ describe 'Order Lookup', :type => :request do
     search_for order.code
   end
 
+  let(:order) { FactoryGirl.create(:order_with_tickets) }
+
   context "when typing or scanning an order code" do
     let(:order) { FactoryGirl.create(:order_with_tickets) }
 
@@ -47,6 +49,10 @@ describe 'Order Lookup', :type => :request do
     pending "should let the user choose all tickets to scan by clicking 'This one' next to each"
     pending "should let the user choose one ticket to scan by clicking 'This one' next to it"
     pending "should let the user choose two tickets to scan by clicking 'This one' next to each"
+  end
 
+  context "when typing or scanning a page shortcut code" do
+    pending "should pre-tick six tickets from that page to scan from an order"
+    pending "should select all tickets if the order is only one page"
   end
 end
