@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Ticket Lookup', :type => :request do
   before do
-    # To be ignored
+    # Orders to be ignored by lookup.
     FactoryGirl.create(:order_with_tickets)
     FactoryGirl.create(:order_with_tickets)
     FactoryGirl.create(:order_with_ticket)
