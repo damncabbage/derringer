@@ -1,7 +1,7 @@
 module Search
   module Adapters
     class Mysql
- 
+
       attr_accessor :connection
 
       def initialize(connection=Orders.connection)
@@ -11,9 +11,6 @@ module Search
       def find_by_text(text)
         orders = find_orders(text)
         return orders
-        # TODO
-        tickets = find_tickets(text)
-        orders.zip(tickets.map(&:order)).flatten.compact
       end
 
       def find_orders(text)
@@ -26,15 +23,9 @@ module Search
             MATCH(orders.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
           )
           OR tickets.full_name LIKE ?
-        ", text, "#{text}%", text, text, "#{text}%").map do |order|
+        ", text, "#{text}%", text, text, "%#{text}%").map do |order|
           ::Search::Result.new(order.tickets)
         end
-      end
-
-      def find_tickets(text)
-        tickets = Ticket.where("
-          MATCH(tickets.full_name) AGAINST (? IN NATURAL LANGUAGE MODE)
-        ", text)
       end
 
     end
