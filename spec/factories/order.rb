@@ -11,20 +11,19 @@ FactoryGirl.define do
     full_name { Faker::Name.name }
     phone { Faker::PhoneNumberAU.phone_number }
     state { Faker::AddressAU.state_abbr }
-    address { "#{Faker::Address.street_address}, #{Faker::AddressAU.city(state)}" }
-    postcode { Faker::AddressAU.zip_code(state) }
-    underage_tickets { rand(2) }
+    address { "#{Faker::Address.street_address}, #{Faker::AddressAU.city}" }
+    postcode { Faker::AddressAU.postcode(state) }
     tickets_count 0 # TODO
   end
 
   factory :order_with_ticket, :parent => :order do
-    after_build do |order|
+    after :build do |order, ctx|
       order.tickets << FactoryGirl.build(:ticket, :order => order)
     end
   end
 
   factory :order_with_tickets, :parent => :order do
-    after_build do |order| 
+    after :build do |order, ctx|
       3.times do
         order.tickets << FactoryGirl.build(:ticket, :order => order)
       end

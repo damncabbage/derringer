@@ -5,7 +5,7 @@ namespace :dev do
 
   desc "Set up the config files from the examples"
   task :config_files do
-    examples = Dir[File.join(Padrino.root, 'config/*.example.yml')]
+    examples = Dir[File.join(File.dirname(__FILE__), '../../config/*.example.yml')]
     examples.each do |example|
       target = example.sub(/\.example\.yml\Z/, '.yml')
       if File.exist? target

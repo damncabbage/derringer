@@ -1,48 +1,34 @@
-source :rubygems
+source 'https://rubygems.org'
 
-# Server requirements
-# gem 'thin' # or mongrel
-# gem 'trinidad', :platform => 'jruby'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 3.2.13'
 
-# Project requirements
-gem 'rake'
-gem 'sinatra-flash', :require => 'sinatra/flash'
-
-# Component requirements
-gem 'compass'
-gem 'haml'
-gem 'activerecord', :require => "active_record"
-gem 'couchrest_model'
-gem 'mysql2'
-gem 'addressable'
-
-gem 'coffee-script'
-#gem 'uglifier', '~> 1.0'
-#gem 'compass', '~> 0.12.alpha'
-gem 'bootstrap-sass'
-
-# Test requirements
-group :test do
-  gem 'rack-test', :require => "rack/test"
-  gem 'factory_girl'
-  gem 'ffaker'
-  gem 'capybara'
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2'
+  gem 'coffee-rails', '~> 3.2'
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', platforms: :ruby
+  gem 'uglifier', '>= 1.0.3'
 end
+
+# Webserver
+gem 'thin'
+
+# DB
+gem 'mysql2'
+
+# Front-end
+gem 'haml-rails'
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+gem 'compass-rails'
 
 group :test, :development do
-  gem 'rspec'
-  gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
   gem 'debugger'
-  gem 'hpricot'
 end
-
-# Padrino Stable Gem
-gem 'padrino', '0.10.7'
-
-# Or Padrino Edge
-# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
-
-# Or Individual Gems
-# %w(core gen helpers cache mailer admin).each do |g|
-#   gem 'padrino-' + g, '0.10.6'
-# end

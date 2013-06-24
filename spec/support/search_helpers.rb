@@ -8,7 +8,6 @@ module SearchHelpers
   end
 
 end
-
 RSpec.configure do |c|
-    c.include SearchHelpers, :type => :request
+  c.include SearchHelpers, :type => :feature
 end
