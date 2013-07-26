@@ -14,8 +14,4 @@ FactoryGirl.define do
     booth { Faker::Internet.ip_v4_address }
   end
 
-  factory :scan_with_deps, :parent => :scan do
-
-  end
-
 end

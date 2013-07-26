@@ -19,6 +19,9 @@ gem 'thin'
 # DB
 gem 'mysql2'
 
+# Models
+gem 'virtus'
+
 # Front-end
 gem 'haml-rails'
 gem 'jquery-rails'
