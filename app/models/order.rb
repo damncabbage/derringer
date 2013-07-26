@@ -1,16 +1,20 @@
 class Order < ActiveRecord::Base
+
+  RESOLVED = 'resolved'
+  PAYMENT_PENDING = 'payment_pending'
+
   has_many :tickets
 
   default_scope where("orders.created_at > '#{Time.now.year}-01-01'") # Dat sum hack.
 
-  scope :paid, where(:status => "resolved")
-  scope :unpaid, where(:status => "payment_pending")
+  scope :paid, where(:status => RESOLVED)
+  scope :unpaid, where(:status => PAYMENT_PENDING)
 
   def paid?
-    status == 'resolved'
+    status == RESOLVED
   end
   def unpaid?
-    status == 'payment_pending'
+    status == PAYMENT_PENDING
   end
 
   def page(page_number)
