@@ -5,7 +5,13 @@ class Order < ActiveRecord::Base
 
   has_many :tickets
 
-  default_scope where("orders.created_at > '#{Time.now.year}-01-01'") # Dat sum hack.
+  # HACK: This is a terrible.
+  # By way of context: the existing PHP-based system the data is imported
+  # from doesn't separate orders by event (eg. SMASH! 2011, SMASH! 2012), instead relying
+  # on the fact that there's an eight month gap between sale periods.
+  # (Its replacement, Booth, handles this by having an Order's line items be associated with a
+  # product belonging to a particular event; each year has a new set of ticket products.)
+  default_scope where('orders.created_at > ?', "#{Time.now.year}-01-01")
 
   scope :paid, where(:status => RESOLVED)
   scope :unpaid, where(:status => PAYMENT_PENDING)
