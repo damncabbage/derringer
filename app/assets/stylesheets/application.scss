@@ -50,14 +50,6 @@ body {
 }
 input:checked + label.btn {
     @extend .active;
-    /* This is an actual copy/paste of the .btn:active style */
-    /*
-    background-color: #E6E6E6;
-    background-image: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: rgba(0, 0, 0, 0.5);
-    outline: 0 none;
-    */
 }
 input[disabled] + label.btn {
     /* This is an actual copy/paste of the .btn:disabled style */
@@ -132,7 +124,10 @@ input[disabled] + label.btn {
     padding: 20px;
     margin-bottom: 10px;
     background: #ccc;
-    cursor: pointer;
+
+    & > a {
+      text-decoration: none;
+    }
 
     .code {
       float: right;
@@ -189,19 +184,20 @@ input[disabled] + label.btn {
 }
 
 .scanned {
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .unpaid {
-margin-top: 10px;
-margin-bottom: 10px;
-padding: 10px;
-background: #ffbbbb;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #ffbbbb;
+  color: #000;
 }
 
 #ticket .scanned {
-padding: 10px;
-background: #ffbbbb;
+  padding: 10px;
+  background: #ffbbbb;
 }
 
 
