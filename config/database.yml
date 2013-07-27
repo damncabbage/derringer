@@ -20,5 +20,6 @@ test:
 
 production:
   <<: *default
-  database: derringer
+  database: "<%= ENV['DB_NAME'] || 'derringer' %>"
+  username: "<%= ENV['DB_USERNAME'] || 'smashcon' %>"
   password: "<%= ENV['DB_PASSWORD'] %>"
