@@ -50,6 +50,7 @@ body {
 }
 input:checked + label.btn {
     @extend .active;
+  background-color: #02B;
 }
 input[disabled] + label.btn {
     /* This is an actual copy/paste of the .btn:disabled style */
@@ -195,7 +196,8 @@ input[disabled] + label.btn {
   color: #000;
 }
 
-#ticket .scanned {
+#order .scanned, #ticket .scanned {
+  border: 1px solid #ff4444;
   padding: 10px;
   background: #ffbbbb;
 }
