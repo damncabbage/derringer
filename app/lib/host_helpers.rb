@@ -12,7 +12,9 @@ module HostHelpers
   def self.id
     ip   = my_first_non_loopback_ipv4
     host = hostname
-    "#{host} (#{ip})"
+    id = "#{host}"
+    id << " (#{ip})" unless ip.blank?
+    id
   end
 
 end
