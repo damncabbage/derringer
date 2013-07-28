@@ -1,7 +1,7 @@
 #ticket.order
   = link_to "&laquo; Back to Search".html_safe, "javascript:window.history.back();", :class => "back"
 
-  = form_tag ticket_scan_path(@ticket), :method => 'post' do |f|
+  = form_tag scan_ticket_path(@ticket), :method => 'post' do |f|
     .together
       .action
         = submit_tag "Confirm this Ticket", :id => "ticket_confirm", :class => "btn btn-success btn-large"

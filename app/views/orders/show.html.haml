@@ -1,7 +1,7 @@
 #order.order
   = link_to "&laquo; Back to Search".html_safe, "javascript:window.history.back();", :class => "back"
 
-  = form_tag order_scan_path(@order), :method => 'post' do |f|
+  = form_tag scan_order_path(@order), :method => 'post' do |f|
     .together
       .action
         = submit_tag "Everybody", :id => "order_confirm", :class => "btn btn-success btn-large", :tabindex => 1
@@ -28,7 +28,7 @@
     %span OR
 
 
-  = form_tag order_scan_tickets_path(@order), :method => 'post' do |f|
+  = form_tag scan_tickets_order_path(@order), :method => 'post' do |f|
     %ul.orders.btn-group
       - @order.tickets.each do |ticket|
         %li

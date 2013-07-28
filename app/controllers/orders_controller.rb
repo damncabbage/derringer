@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
 
   # /orders/:id/scan
   def scan
+    # TODO: What is going on here? Should be populating :id. :|
     @order = Order.includes(:tickets).find(params[:id])
     @order.tickets.each do |ticket|
       ticket.scan!
