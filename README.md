@@ -1,4 +1,4 @@
-# Derringer
+# Derringer [![Build Status](https://travis-ci.org/damncabbage/derringer.png)](https://travis-ci.org/damncabbage/derringer)
 
 The mobile companion to SMASH!'s online ticket sales system.
 
