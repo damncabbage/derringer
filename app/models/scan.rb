@@ -29,8 +29,16 @@ class Scan
     end
   end
 
-  def self.find_all_by_ticket_code(code)
-    Dir[File.join(SCANS_PATH, '**', "#{code} *")].map do |filename|
+  def self.find_all_by_order_code(order_code)
+    # order_code, eg. S3-123ABCD
+    Dir[File.join(SCANS_PATH, '**', "#{order_code}-* *")].map do |filename|
+      self.from_json(File.read(filename))
+    end
+  end
+
+  def self.find_all_by_ticket_code(ticket_code)
+    # ticket_code is S3-123ABCD-01AB
+    Dir[File.join(SCANS_PATH, '**', "#{ticket_code} *")].map do |filename|
       self.from_json(File.read(filename))
     end
   end
