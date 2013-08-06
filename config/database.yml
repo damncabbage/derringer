@@ -5,9 +5,9 @@
 #   gem 'sqlite3'
 development: &default
   adapter: mysql2
-  database: derringer_development
-  username: smashcon
-  password: smashcon
+  database: "<%= ENV['DB_NAME'] || 'derringer_development' %>"
+  username: "<%= ENV['DB_USERNAME'] || 'smashcon' %>"
+  password: "<%= ENV['DB_PASSWORD'] || 'smashcon' %>"
   host: localhost
   encoding: utf8
 
