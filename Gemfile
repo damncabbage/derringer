@@ -34,6 +34,9 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'ffaker'
-  gem 'debugger'
   gem 'launchy'
+end
+
+group :development do
+  gem 'debugger'
 end
