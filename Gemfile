@@ -31,6 +31,7 @@ gem 'compass-rails'
 group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'debugger'
