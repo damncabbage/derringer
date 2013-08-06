@@ -1,0 +1,33 @@
+!!! html5
+%html.no-js{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %title SMASH! Tickets
+    %meta{:content => "width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0", :name => "viewport"}/
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-dropdown-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "/"} SMASH!
+          .nav-collapse
+            %ul.nav
+              %li.active
+                = link_to "Ticket Booth", root_path
+              %li
+                = link_to "Statistics", statistics_path
+              %li
+                = link_to "Settings", settings_path
+          / /.nav-collapse
+    .panels-container
+      #search-panel.panel-outer
+        .panel-inner
+          .container= yield
+

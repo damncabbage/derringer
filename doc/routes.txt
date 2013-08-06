@@ -1,7 +1,0 @@
-/
-/search?q=
-/scans/create
-/tickets/:id
-/orders/:id # includes tickets in JSON response
-/stats
-/settings

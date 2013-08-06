@@ -1,0 +1,252 @@
+// Strap it.
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+// Compass libs.
+@import "compass/utilities";
+@import "compass/css3";
+
+// Helpers
+.animated-hide-open {
+  @include transition-property('opacity, height, padding');
+  @include transition-duration(0.5s);
+  opacity: 1;
+}
+.animated-hide-fold {
+  opacity: 0;
+  padding-top: 0; padding-bottom: 0;
+  margin-top: 0; margin-bottom: 0;
+}
+.animated-hide {
+  @extend .animated-hide-open;
+  /* Because bootstrap overrides hide, hidden, invisible, collapse and collapsed. */
+  &.fold {
+    @extend .animated-hide-fold;
+  }
+}
+
+
+body {
+  padding-bottom: 20px;
+}
+
+.masthead {
+  padding: 60px 30px 30px;
+  text-align: center;
+}
+
+
+/***** Generic Components *****/
+
+/* Toggle Buttons */
+.btn-group input {
+    display: none;
+}
+.btn-group input:first-child + .btn {
+     /* This is an actual copy/paste of the .btn-group .btn:first-child style */
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    margin-left: 0;
+}
+input:checked + label.btn {
+    @extend .active;
+  background-color: #02B;
+}
+input[disabled] + label.btn {
+    /* This is an actual copy/paste of the .btn:disabled style */
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.65;
+}
+
+
+/***** Search *****/
+
+#search-form {
+  @extend .row;
+  margin-bottom: 45px;
+
+  .inputs {
+    @extend .span10;
+    @extend .offset1;
+    position: relative;
+    background: #ccc;
+    @include border-radius(5px);
+    padding: 9px 9px 0 9px;
+
+    .text {
+      @extend .span8;
+      padding: 12px 8px;
+      line-height: 22px;
+      height: 22px;
+      font-size: 20px;
+    }
+
+    .submit {
+      @extend .span2;
+      @extend .btn;
+      @extend .btn-primary;
+      @extend .btn-large;
+      float: right;
+      font-size: 20px;
+      padding: 11px 15px;
+    }
+  }
+
+  .tip.touch {
+    @include replace-text-with-dimensions('tap-here.png');
+    position: absolute;
+    top: image-height('tap-here.png') - 20px;
+    right: 0px;
+    display: none;
+  }
+  .tip.mouse {
+    @include replace-text-with-dimensions('click-here.png');
+    position: absolute;
+    top: image-height('click-here.png') - 20px;
+    right: 0px;
+  }
+}
+
+/* Results list */
+#search-results {
+  min-height: 100px;
+}
+
+/* Orders list (usually also the results list) */
+.orders {
+  & > li {
+    @include pie-clearfix;
+    @include border-radius(5px);
+    display: block;
+    list-style: none;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #ccc;
+
+    & > a {
+      text-decoration: none;
+    }
+
+    .code {
+      float: right;
+      font-size: 1.4em;
+      padding-top: 8px;
+      color: #666;
+    }
+    p.others {
+      float: left;
+      margin-bottom: 0;
+    }
+    ul.others {
+      float: left;
+      margin-left: 6px;
+      list-style: none;
+
+      li { float: left; padding-right: 3px; }
+      li:after            { content: ','; }
+      li:last-child:after { content: '.'; }
+    }
+  }
+}
+
+/* Notification */
+.message {
+  padding-left: 30px;
+  /* TODO: background sprite */
+}
+
+
+/***** Order View *****/
+#order {
+  .back {
+    // TODO: Block
+    cursor: pointer;
+  }
+  .group {
+  }
+  .action {
+    float: right;
+  }
+  .or-divider {
+    display:block;
+    font-size: 120%; font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}
+
+#ticket {
+  .action {
+    float: right;
+  }
+}
+
+.scanned {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.unpaid {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #ffbbbb;
+  color: #000;
+}
+
+#order .scanned, #ticket .scanned {
+  border: 1px solid #ff4444;
+  padding: 10px;
+  background: #ffbbbb;
+}
+
+
+hr {
+  margin-top: 180px;
+  display: block;
+}
+
+.panels-container {
+  //position: absolute;
+  //overflow: hidden;
+  //width: 100%;
+  //height: 92%;
+  padding-top: 60px;
+}
+html.appleios .panels-container { padding-top: 30px; }
+
+.panel-outer {
+  @include transition-property(left);
+  @include transition-duration(0.5s);
+  //position: absolute;
+  //width: 100%;
+  //left: -50%;
+}
+.panel-inner {
+  @include transition-property(left);
+  @include transition-duration(0.5s);
+  //position: absolute;
+  //width: 100%;
+  //left: 50%;
+}
+
+#search-panel {
+  &.left {
+    left: -100%;
+    .panel-inner {
+      left: 0%;
+    }
+  }
+}
+
+#order-panel {
+  &.right {
+    left: 0%;
+    .panel-inner {
+      left: 100%;
+    }
+  }
+}
+

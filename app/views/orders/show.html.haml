@@ -1,0 +1,57 @@
+#order.order
+  = link_to "&laquo; Back to Search".html_safe, "javascript:window.history.back();", :class => "back"
+
+  = form_tag scan_order_path(@order), :method => 'post' do |f|
+    .together
+      .action
+        = submit_tag "Everybody", :id => "order_confirm", :class => "btn btn-success btn-large", :tabindex => 1
+
+      %h2= @order.code
+      %h3= "Ordered by #{@order.full_name}."
+
+      - unless @order.paid?
+        .unpaid
+          %p Warning! This order has not been paid for.
+
+      - if @some_scanned
+        .scanned
+          %p Warning! Some of these tickets have already been scanned.
+
+      .group-details
+        %p= "Order with #{@order.tickets.count} people:"
+        %ul
+          - @order.tickets.each do |ticket|
+            %li= "#{ticket.full_name}, #{ticket.ticket_type.title}"
+
+
+  .or-divider
+    %span OR
+
+
+  = form_tag scan_tickets_order_path(@order), :method => 'post' do |f|
+    %ul.orders.btn-group
+      - @order.tickets.each do |ticket|
+        %li
+          .action
+            - if @selected[ticket.id.to_s]
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1, :checked => "checked"
+            - else
+              = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1
+            = label_tag "tickets_#{ticket.id}", "This One", :class => "btn btn-blue btn-primary btn-large"
+          %h3= ticket.full_name
+          - if ticket.scanned?
+            .scanned
+              %p Warning! Ticket already scanned today:
+              %ul.scanned
+                - ticket.scans.each do |scan|
+                  %li= "#{scan.created_at}, by #{scan.booth}"
+    .action
+      = submit_tag "Scan Selected Tickets", :class => "btn btn-success btn-large"
+
+  .history
+    %h3 Order History
+    %ul
+      %li
+        %time= "#{@order.created_at.strftime("%-d %B, %Y")}"
+        created order.
+

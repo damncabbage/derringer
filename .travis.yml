@@ -1,0 +1,6 @@
+rvm:
+  - 1.9.3
+env:
+  - DB_NAME="derringer_test" DB_USERNAME="travis" DB_PASSWORD=""
+before_script:
+  - mysql -e 'CREATE DATABASE derringer_test;'
