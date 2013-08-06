@@ -8,7 +8,7 @@ describe "Order Model" do
 
   context "when identifying barcodes" do
     it "should recognise valid order barcodes" do
-      Order.code?('S-5HKH4MR').should_not be_nil 
+      Order.code?('S-5HKH4MR').should_not be_nil
       Order.code?('S-5HKH4MRR').should be_nil # Too long
       Order.code?('S-5HKH4MZ').should be_nil # Invalid character
       Order.code?('S1-5HKH4MR').should be_nil # 2011 barcode
@@ -16,7 +16,7 @@ describe "Order Model" do
     end
 
     it "should recognise valid page barcodes" do
-      Order.page_code?('S-5HKH4MR-%M01').should_not be_nil 
+      Order.page_code?('S-5HKH4MR-%M01').should_not be_nil
       Order.page_number_for_code('S-5HKH4MR-%M01').should == 1
       Order.page_number_for_code('S-5HKH4MR-%M18').should == 18
 

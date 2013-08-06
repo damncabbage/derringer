@@ -7,7 +7,7 @@ FactoryGirl.define do
       "S-#{code}"
     end
     bpay_crn { rand(89999) + 10000 }
-    status "resolved"
+    status Order::RESOLVED
     full_name { Faker::Name.name }
     phone { Faker::PhoneNumberAU.phone_number }
     state { Faker::AddressAU.state_abbr }
