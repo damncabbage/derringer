@@ -41,3 +41,8 @@ RSpec.configure do |config|
   config.before(:each, &clear_scans)
   config.after(:each, &clear_scans)
 end
+
+# Global helpers
+def page!
+  save_and_open_page
+end
