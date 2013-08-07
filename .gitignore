@@ -13,3 +13,6 @@
 
 # Scan records (db/scans/1234/*.json)
 /db/scans/*
+
+# BTSync generated config
+/config/btsync.json
