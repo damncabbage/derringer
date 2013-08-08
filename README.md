@@ -18,7 +18,7 @@ You need the following installed:
 
 ... And to synchronise with other nodes:
 
-* btsync 1.0+
+* BTSync 1.0+ (provided in the repo under `bin/...`)
 
 
 ### Environment
@@ -29,7 +29,7 @@ In development, Derringer will run straight off the bat. In production, the foll
 * `DB_USERNAME` (defaults to "smashcon")
 * `DB_PASSWORD` (required)
 
-(TODO: Move these into a .env, use dotenv.)
+You can set these with a `.env` file; a `.env-example` file is provided as a template.
 
 
 ### MySQL
@@ -43,9 +43,22 @@ bundle exec rake db:reset
 
 ### BTSync
 
-TODO.
+
+BTSync config files aren't dynamic; you need to generate it for your install with a rake task, providing the generated secret as an environment variable, eg.
+
+```
+BTSYNC_SECRET=`bundle exec rake btsync:secret` # Secret that is shared across all machines
+bundle exec rake btsync:config SECRET="$BTSYNC_SECRET"
+```
+
+### Deployment
+
+Two scripts are provided in the `deployment` folder: `sync.sh` (which runs as a Puppet-like script that installs and configures everything, and can be run over and over to keep everything up to date) and `data_reset.sh` (which drops the database and recreates it from a dump, and clears all the ticket scans).
+
+Also, `sync.sh` needs to be run as root because I'm a terrible person.
+
+``
+sudo BTSYNC_SECRET=SeeTheBTSyncSectionAbove DB_PASSWORD=yolochangethis ~/derringer/deployment/sync.sh
 
 
-### Provisioning
-
-TODO.
+```
