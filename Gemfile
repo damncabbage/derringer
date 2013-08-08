@@ -28,6 +28,9 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'compass-rails'
 
+# Environment management
+gem 'dotenv-rails'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'

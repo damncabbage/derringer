@@ -64,6 +64,9 @@ GEM
     debugger-ruby_core_source (1.2.2)
     descendants_tracker (0.0.1)
     diff-lcs (1.2.4)
+    dotenv (0.8.0)
+    dotenv-rails (0.8.0)
+      dotenv (= 0.8.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -181,6 +184,7 @@ DEPENDENCIES
   compass-rails
   database_cleaner
   debugger
+  dotenv-rails
   factory_girl_rails
   ffaker
   haml-rails

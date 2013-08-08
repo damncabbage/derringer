@@ -16,3 +16,6 @@
 
 # BTSync generated config
 /config/btsync.json
+
+# Environment configuration
+/.env
