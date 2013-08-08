@@ -58,7 +58,7 @@ pushd $DERRINGER_PATH
   log "Deployment bundle install"
   $SMASHCON bundle install --deployment
 
-  log "Clearing existing assets (if any)"
+  log "Clearing and recompiling assets"
   rm -rf public/assets
   $RAKE assets:precompile
 
