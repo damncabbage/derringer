@@ -16,6 +16,6 @@ namespace :btsync do
 
   desc "Generate a secret for use with btsync:config"
   task :secret => :environment do
-    puts `#{Rails.root.join('bin', 'btsync-linux-x64')} --generate-secret`
+    puts `#{Rails.root.join('bin', 'btsync-linux-i386')} --generate-secret`
   end
 end

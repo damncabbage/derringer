@@ -1,2 +1,2 @@
 web: bundle exec rails server
-btsync: ./bin/btsync-linux-x64 --config ./config/btsync.json --nodaemon
+btsync: ./bin/btsync-linux-i386 --config ./config/btsync.json --nodaemon
