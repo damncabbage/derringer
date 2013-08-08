@@ -1,5 +1,5 @@
 {
-  "device_name": "Derringer 00",
+  "device_name": "Derringer (<%= hostname %>)",
   "listening_port" : 0,                       // 0 - randomize port
 
   /* storage_path dir contains auxilliary app files
@@ -26,11 +26,11 @@
     {
       // use --generate-secret in command line to create new secret
       "secret" : "<%= secret %>",                // * required field
-      "dir" : "<%= Rails.root.join('scans') %>", // * required field
+      "dir" : "<%= Rails.root.join('db', 'scans') %>", // * required field
 
       // use relay server when direct connection fails
-      "use_relay_server" : true,
-      "use_tracker" : true,
+      "use_relay_server" : false,
+      "use_tracker" : false,
       "use_dht" : false,
       "search_lan" : true,
 
@@ -45,5 +45,8 @@
         ]
       */
     }
-  ]
+  ],
+
+  // Force a re-scan/sync every X seconds
+  "folder_rescan_interval": 15
 }

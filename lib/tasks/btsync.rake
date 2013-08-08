@@ -4,6 +4,7 @@ namespace :btsync do
 
   desc "Generate the btsync config file from the template; needs SECRET."
   task :config => :environment do
+    hostname = HostHelpers.hostname
     secret = ENV['SECRET'] or raise "Required: SECRET=shared-secret-key"
     config_source = Rails.root.join('config', 'btsync-template.json.erb')
     config_target = Rails.root.join('config', 'btsync.json')
