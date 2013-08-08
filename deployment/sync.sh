@@ -8,7 +8,7 @@
 
 set -e # Bail immediately on errors.
 
-# Guard checks
+### Guard checks ###
 if [ -z "$DB_PASSWORD" ]; then
   echo "Environment variable DB_PASSWORD is required."
   exit 1;
@@ -30,7 +30,8 @@ if [ `id -u` -gt 0 ]; then
   exit 1;
 fi
 
-# Shortcuts
+
+### Shortcuts ###
 function log() {
   echo -e "\n*** $1"
 }
@@ -38,6 +39,8 @@ SMASHCON="sudo -u $SMASHCON_USER"
 BUNDLE_EXEC="$SMASHCON RAILS_ENV=production bundle exec"
 RAKE="$BUNDLE_EXEC rake"
 
+
+### Start the sync ###
 pushd $DERRINGER_PATH
   log "Resync codebase (assumes codebase already present)"
   $SMASHCON git fetch origin
@@ -55,11 +58,18 @@ pushd $DERRINGER_PATH
   log "Deployment bundle install"
   $SMASHCON bundle install --deployment
 
+  log "Clearing existing assets (if any)"
+  rm -rf public/assets
+  $RAKE assets:precompile
+
   log "Environment setup"
   echo -e "DB_PASSWORD=$DB_PASSWORD\nSECRET=$BTSYNC_SECRET" | $SMASHCON tee .env
 
   log "BTSync configuration"
   $RAKE btsync:config --trace
+
+  log "Kick Passenger into restarting"
+  $SMASHCON touch tmp/restart.txt
 popd
 
 log "Restart BTSync (after regenerating its config earlier)"
