@@ -50,13 +50,11 @@ module Import
         "
           INSERT INTO `tickets` (
             `id`, `order_id`, `ticket_type_id`,
-            `code`, `full_name`, `age`,
-            `gender`, `postcode`,
+            `code`, `full_name`,
             `created_at`, `updated_at`
           ) SELECT
             `id`, `order_id`, `ticket_type_id`,
-            `cache_code`, `customer_full_name`, `customer_age`,
-            `customer_gender`, `customer_postcode`,
+            `cache_code`, `customer_full_name`,
             `create_time`, `update_time`
           FROM `#{source_db}`.`chiki_ticket`
           WHERE

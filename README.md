@@ -53,12 +53,12 @@ bundle exec rake btsync:config SECRET="$BTSYNC_SECRET"
 
 ### Deployment
 
-Two scripts are provided in the `deployment` folder: `sync.sh` (which runs as a Puppet-like script that installs and configures everything, and can be run over and over to keep everything up to date) and `data_reset.sh` (which drops the database and recreates it from a dump, and clears all the ticket scans).
+Two scripts are provided in the `deployment` folder: `sync.sh` (which runs as a Puppet-like script that installs and configures everything, and can be run over and over to keep everything up to date), `db_reset.sh` (which drops the database and recreates it from a dump), and `scans_reset.sh` (clears all the ticket scans).
 
 Also, `sync.sh` needs to be run as root because I'm a terrible person.
 
 ``
 sudo BTSYNC_SECRET=SeeTheBTSyncSectionAbove DB_PASSWORD=yolochangethis ~/derringer/deployment/sync.sh
-
-
+CHIKI_DUMP_PATH=tmp/chiki.sql ~/derringer/deployment/db_reset.sh
+~/derringer/deployment/scans_reset.sh
 ```
