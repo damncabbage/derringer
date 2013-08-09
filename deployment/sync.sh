@@ -74,5 +74,6 @@ popd
 
 log "Restart BTSync (after regenerating its config earlier)"
 stop derringer-btsync-1 || true # Might not be running.
+sleep 4 # Pad out the race condition; btsync doesn't shut off immediately.
 start derringer-btsync-1
 
