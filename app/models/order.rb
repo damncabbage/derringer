@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
   def page(page_number)
     return nil unless page_number
     per_page = 6
-    start = per_page * ((page_number/10) - 1)
+    start = per_page * ((page_number) - 1)
     tickets[(start..(start + per_page - 1))] # HACK
   end
 
