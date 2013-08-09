@@ -28,6 +28,10 @@ class Ticket < ActiveRecord::Base
     save!
   end
 
+  def companion_card?
+    ticket_type.title.match /Companion/
+  end
+
   class << self
 
     def code?(code)

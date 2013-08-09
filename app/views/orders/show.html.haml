@@ -39,6 +39,9 @@
               = check_box_tag "tickets[#{ticket.id}]", :id => "tickets_#{ticket.id}", :value => 1
             = label_tag "tickets_#{ticket.id}", "This One", :class => "btn btn-blue btn-primary btn-large"
           %h3= ticket.full_name
+          - if ticket.companion_card?
+            %p
+              %strong Please ask to see the ticket-holder's Companion Card.
           - if ticket.scanned?
             .scanned
               %p Warning! Ticket already scanned today:

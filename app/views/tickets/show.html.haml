@@ -9,6 +9,10 @@
       %h2= @ticket.full_name
       %h3= link_to @ticket.order.code, order_path(@ticket.order)
 
+      - if @ticket.companion_card?
+        %p
+          %strong Please ask to see the ticket-holder's Companion Card.
+
       - unless @ticket.order.paid?
         .unpaid
           %p Warning! This order has not been paid for.
@@ -16,7 +20,7 @@
       - if @ticket.scanned?
         .scanned
           %p Warning! Ticket already scanned today:
-          %ul.scanned
+          %ul
             - @ticket.scans.each do |scan|
               %li= "#{scan.created_at}, by #{scan.booth}"
 
