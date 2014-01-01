@@ -9,10 +9,14 @@ describe "Order Model" do
   context "when identifying barcodes" do
     it "should recognise valid order barcodes" do
       Order.code?('S-5HKH4MR').should_not be_nil
+
+      # 2011-era barcodes that ended up in generator this year because of a
+      # horrific testless old-system bug.
+      Order.code?('S1-5HKH4MR').should_not be_nil
+      Order.code?('S1-5HKH4M').should be_nil # Too short
+
       Order.code?('S-5HKH4MRR').should be_nil # Too long
       Order.code?('S-5HKH4MZ').should be_nil # Invalid character
-      Order.code?('S1-5HKH4MR').should be_nil # 2011 barcode
-      Order.code?('S1-5HKH4M').should be_nil # 2011 barcode
     end
 
     it "should recognise valid page barcodes" do
